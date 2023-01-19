@@ -2,6 +2,7 @@ package junw.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import junw.entry.Employee;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * Created by Intellij IDEA.
@@ -12,5 +13,6 @@ import junw.entry.Employee;
  * @Date 2023-01-14-35  星期四
  * @description
  */
+@Mapper
 public interface EmployeeMapper extends BaseMapper<Employee> {
 }
