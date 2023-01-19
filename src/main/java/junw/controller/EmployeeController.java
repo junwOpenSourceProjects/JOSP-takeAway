@@ -1,22 +1,17 @@
 package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.ChainQuery;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import junw.common.ReturnResult;
 import junw.entry.Employee;
 import junw.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletMapping;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -53,7 +48,7 @@ public class EmployeeController {
 		Employee serviceOne = employeeService.getOne(chainWrapper);
 
 		if (serviceOne == null) {
-			return ReturnResult.sendError("结果为空");
+			return ReturnResult.sendError("该用户不存在！");
 		}
 		if (!serviceOne.getPassword().equals(employeePassword)) {
 			return ReturnResult.sendError("密码错误");
@@ -65,11 +60,28 @@ public class EmployeeController {
 		// httpServletRequest.getSession().setAttribute("employeeId", employee.getId());
 		// 注意一下这里，要保存的是数据库查询得到的结果
 		// 不是登录过程中，传递过来的登录信息
-		httpServletRequest.getSession().setAttribute("employeeId", serviceOne.getId());
+		// 之前我们保存到mysql中的是加密后的密码e10adc3949ba59abbe56e057f20f883e
+		// 所以这里是通过
+		httpServletRequest.getSession().setAttribute("employeeInfo", serviceOne.getId());
 
 		// return employeeReturnResult.setReturnData(employee);
 		// 不是直接使用set方式来保存对象
 		// 而是直接调用静态方法，保存上面返回的数据
 		return ReturnResult.sendSuccess(serviceOne);
+	}
+
+	/**
+	 * 登出功能
+	 *
+	 * @param httpServletRequest httpServletRequest
+	 * @return 返回是否退出成功
+	 */
+	@PostMapping("/logout")
+	public ReturnResult<String> logout(HttpServletRequest httpServletRequest) {
+		// 我们前面登录的时候，使用了session
+		// 这里直接去session中拿到用户数据就可以校验和设置退出功能
+		httpServletRequest.getSession().removeAttribute("employeeInfo");
+		// 直接拿到之前添加的session就可以完成移除操作
+		return ReturnResult.sendSuccess("退出成功");
 	}
 }
