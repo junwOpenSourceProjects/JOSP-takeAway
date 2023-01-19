@@ -20,7 +20,7 @@ public class ReggieApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReggieApplication.class, args);
-		log.debug("spring已经启动了");
+		log.info("spring已经启动了");
 	}
 
 }
