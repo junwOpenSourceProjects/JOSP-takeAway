@@ -125,13 +125,16 @@
           }
         },
         computed: {},
+        // 生命周期函数，也可以说是钩子函数
         created() {
+          // 自动调用定义出来的初始化方法
           this.init()
           this.user = JSON.parse(localStorage.getItem('userInfo')).username
         },
         mounted() {
         },
         methods: {
+
           async init () {
             const params = {
               page: this.page,

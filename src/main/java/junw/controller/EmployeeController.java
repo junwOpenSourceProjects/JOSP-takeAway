@@ -1,6 +1,7 @@
 package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import junw.common.ReturnResult;
 import junw.entity.Employee;
 import junw.service.EmployeeService;
@@ -8,10 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -118,6 +117,28 @@ public class EmployeeController {
 // 因为需要存到数据库中，所以需要调用一下service
         employeeService.save(employee);
         return ReturnResult.sendSuccess("新增一个用户");
+    }
 
+    /**
+     * 分页查询
+     *
+     * @param page     分页
+     * @param pageSize 分页数量
+     * @param name     姓名
+     * @return 分页结果
+     */
+    @GetMapping("/page")
+    public ReturnResult<Page> getPage(int page, int pageSize, String name) {
+        log.info("我是page的数据：{}，我是pageSize的数据：{}，我是姓名{}", page, pageSize, name);
+        Page page1 = new Page(page, pageSize);
+        LambdaQueryWrapper<Employee> lambdaQueryWrapper = new LambdaQueryWrapper();
+//        x.eq(Employee::getName, name)
+        if (name != null) {
+            lambdaQueryWrapper.like(Employee::getName, name);
+        }
+        lambdaQueryWrapper.orderByDesc(Employee::getUpdateTime);
+
+        employeeService.page(page1, lambdaQueryWrapper);// 分页查询
+        return ReturnResult.sendSuccess(page1);
     }
 }

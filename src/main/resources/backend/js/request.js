@@ -17,6 +17,7 @@
     // get请求映射params参数
     if (config.method === 'get' && config.params) {
       let url = config.url + '?';
+      // get方式添加参数
       for (const propName of Object.keys(config.params)) {
         const value = config.params[propName];
         var part = encodeURIComponent(propName) + "=";
@@ -34,6 +35,7 @@
       }
       url = url.slice(0, -1);
       config.params = {};
+      // 拼接完成以后，再传递回去
       config.url = url;
     }
     return config
