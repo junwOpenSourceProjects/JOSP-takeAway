@@ -49,7 +49,7 @@ public class EmployeeController {
         LambdaQueryWrapper<Employee> chainWrapper = new LambdaQueryWrapper<>();
         chainWrapper.eq(Employee::getUsername, employee.getUsername());// 这里是eq，不是select
         Employee serviceOne = employeeService.getOne(chainWrapper);
-//		getone的前提是我们的数据库，已经对其做好了唯一约束
+// getone的前提是我们的数据库，已经对其做好了唯一约束
 
         if (serviceOne == null) {
             return ReturnResult.sendError("该用户不存在！");
@@ -132,7 +132,7 @@ public class EmployeeController {
         log.info("我是page的数据：{}，我是pageSize的数据：{}，我是姓名{}", page, pageSize, name);
         Page page1 = new Page(page, pageSize);
         LambdaQueryWrapper<Employee> lambdaQueryWrapper = new LambdaQueryWrapper();
-//        x.eq(Employee::getName, name)
+// x.eq(Employee::getName, name)
         if (name != null) {
             lambdaQueryWrapper.like(Employee::getName, name);
         }
@@ -140,5 +140,36 @@ public class EmployeeController {
 
         employeeService.page(page1, lambdaQueryWrapper);// 分页查询
         return ReturnResult.sendSuccess(page1);
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param employee 员工
+     * @return 是否修改成功
+     */
+    @PutMapping()
+    public ReturnResult<String> updateAccount(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
+        employee.setUpdateUser((Long) httpServletRequest.getSession().getAttribute("employeeInfo"));
+        employee.setUpdateTime(new Date());
+        employeeService.updateById(employee);
+        return ReturnResult.sendSuccess("修改成功");
+    }
+
+    /**
+     * 根据id查询原始数据
+     *
+     * @param id id
+     * @return 返回结果
+     */
+    @GetMapping("/{id}")
+    public ReturnResult<Employee> getById(@PathVariable long id) {
+        log.info("根据id获取参数");
+        Employee byId = employeeService.getById(id);
+
+        if (byId != null) {
+            return ReturnResult.sendSuccess(byId);
+        }
+        return ReturnResult.sendError("无结果")
     }
 }
