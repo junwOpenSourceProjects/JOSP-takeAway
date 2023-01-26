@@ -45,7 +45,7 @@ public class LoginCheckFliter implements Filter {
         String[] requestUrls = {"/employee/login", "/employee/logout", "/backend/**", "/front/**"};
 
 
-        log.info("我是拦截，拦截的请求是{}", httpServletRequest.getRequestURL());
+        log.info("我是LoginCheckFliter拦截，拦截的请求是{}", httpServletRequest.getRequestURL());
         // {}相当于占位符，直接跟上参数，就可以默认带上后面的变量
 
         // 判断是否需要处理
@@ -58,10 +58,13 @@ public class LoginCheckFliter implements Filter {
         // 如果需要处理，那么在这里直接放行即可
         if (httpServletRequest.getSession().getAttribute("employeeInfo") != null) {
             filterChain.doFilter(httpServletRequest, httpServletResponse);
+            log.info("登录成功，当前用户为：" + httpServletRequest.getSession().getAttribute("employeeInfo"));
             return;
         }
-// httpServletResponse.getWriter().write(JSON.toJSONString(ReturnResult.sendError("登录错误")));
-// 必须按照前端的返回错误信息，来设置这里的消息
+        // httpServletResponse.getWriter().write(JSON.toJSONString(ReturnResult.sendError("登录错误")));
+        // 必须按照前端的返回错误信息，来设置这里的消息
+        log.info("登录失败");
+
         httpServletResponse.getWriter().write(JSON.toJSONString(ReturnResult.sendError("NOTLOGIN")));
         // 这里做的其实是，将我们的ReturnResult对象转换为json格式，然后将其写回到前端的消息体中
         return;
@@ -78,7 +81,7 @@ public class LoginCheckFliter implements Filter {
     public boolean checkLogin(String[] urls, String requestURI) {
         for (String demoUrl : urls) {
             boolean match = ANT_PATH_MATCHER.match(demoUrl, requestURI);
-            log.info("我是请求链接：" + demoUrl)
+            log.info("我是LoginCheckFliter请求链接：" + demoUrl);
             if (match) {
                 return true;
             }

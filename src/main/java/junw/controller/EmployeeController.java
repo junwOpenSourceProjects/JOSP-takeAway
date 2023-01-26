@@ -6,6 +6,7 @@ import junw.entity.Employee;
 import junw.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 
 /**
  * Created by Intellij IDEA.
@@ -84,5 +88,36 @@ public class EmployeeController {
         httpServletRequest.getSession().removeAttribute("employeeInfo");
         // 直接拿到之前添加的session就可以完成移除操作
         return ReturnResult.sendSuccess("退出成功");
+    }
+
+    /**
+     * 新增员工
+     *
+     * @param employee 实体类
+     * @return 返回结果
+     */
+    @PostMapping
+    public ReturnResult<String> saveEmployee(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
+// 因为前端的数据是json形式的，所以这里必须添加RequestBody才能正常封装
+        log.info("新增员工：" + employee.toString());
+// employee.setPassword("123456");// 设置员工的初试密码
+        employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));// 需要加密
+// employee.setCreateTime(Date.from(LocalTime.now()));
+        employee.setCreateTime(new Date());
+        employee.setUpdateTime(new Date());
+        // 获取创建和更新时间
+// log.info("当前的id为：" + httpServletRequest.getSession().getId());
+        log.info("当前的id为：" + httpServletRequest.getSession().getAttribute("employeeInfo"));
+        Long id = (Long) httpServletRequest.getSession().getAttribute("employeeInfo");
+// 这里直接从getAttribute中，就可以直接拿到里面的id和所有信息
+        employee.setCreateUser(id);
+// 111111111111111111
+// 18912341234
+        // 获取具体的id
+        employee.setUpdateUser(id);
+// 因为需要存到数据库中，所以需要调用一下service
+        employeeService.save(employee);
+        return ReturnResult.sendSuccess("新增一个用户");
+
     }
 }
