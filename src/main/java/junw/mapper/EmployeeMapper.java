@@ -1,7 +1,7 @@
 package junw.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import junw.entry.Employee;
+import junw.entity.Employee;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

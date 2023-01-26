@@ -1,7 +1,7 @@
 package junw.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import junw.entry.Employee;
+import junw.entity.Employee;
 import junw.mapper.EmployeeMapper;
 import junw.service.EmployeeService;
 import org.springframework.stereotype.Service;

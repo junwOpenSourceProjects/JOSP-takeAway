@@ -1,7 +1,7 @@
 package junw.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import junw.entry.Employee;
+import junw.entity.Employee;
 
 /**
  * Created by Intellij IDEA.

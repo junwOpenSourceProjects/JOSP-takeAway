@@ -2,7 +2,7 @@ package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import junw.common.ReturnResult;
-import junw.entry.Employee;
+import junw.entity.Employee;
 import junw.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
