@@ -13,4 +13,5 @@ import junw.entity.Employee;
  * @description
  */
 public interface EmployeeService extends IService<Employee> {
+//    mybatisPlus提供的父接口IService
 }

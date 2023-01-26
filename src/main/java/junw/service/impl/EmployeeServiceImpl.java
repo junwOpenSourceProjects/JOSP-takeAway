@@ -17,4 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> implements EmployeeService {
+//    mybatisPlus提供的接口
+//    ServiceImpl<EmployeeMapper, Employee>
+//    分别指定我们的mapper和实体类
 }
