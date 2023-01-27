@@ -27,8 +27,6 @@ w
 G.idea/sonarlint/issuestore/1/c/1cdf7b57a1bbd24c22003d847af85c31600bebb1,8\1\81766bc6722010df19ed257330ae54f683667218
 b
 2src/main/java/junw/common/JacksonObjectMapper.java,9\4\94ee2097a0859454a2c052005ede3df4b4a4b6b9
-e
-5src/main/java/junw/common/GlobalExceptionHandler.java,1\4\14b409bcce46a289611103b847b95954c575bf0a
 f
 6src/main/java/junw/controller/EmployeeController2.java,1\6\16e73eb6be107d2713557db567f44c97fec5fef8
 _

@@ -6,6 +6,7 @@ import junw.common.ReturnResult;
 import junw.entity.Category;
 import junw.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,7 +68,20 @@ public class CategoryController {
     @DeleteMapping
     public ReturnResult<String> delete(Long id) {
         log.info("我是删除方法，删除id为" + id);
-        categoryService.removeById(id);
+        // categoryService.removeById(id);
+        categoryService.removeCategory(id);
         return ReturnResult.sendSuccess("删除成功");
+    }
+
+    /**
+     * 根据id更新
+     *
+     * @param category 实体类
+     * @return 返回更新成功
+     */
+    @PutMapping
+    public ReturnResult<String> updateById(Category category) {
+        categoryService.updateById(category);
+        return ReturnResult.sendSuccess("修改分类信息成功");
     }
 }
