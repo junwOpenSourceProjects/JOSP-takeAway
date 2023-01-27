@@ -42,6 +42,13 @@ public class CategoryController {
         return ReturnResult.sendError("添加失败");
     }
 
+    /**
+     * 分页
+     *
+     * @param page     页面
+     * @param pageSize 页面条数
+     * @return 分页
+     */
     @GetMapping("/page")
     public ReturnResult<Page> page(int page, int pageSize) {
         Page<Category> page1 = new Page<>(page, pageSize);
