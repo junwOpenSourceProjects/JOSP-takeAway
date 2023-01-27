@@ -7,14 +7,10 @@ import junw.entity.Employee;
 import junw.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.util.DigestUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 
 /**
@@ -28,8 +24,8 @@ import java.util.Date;
  */
 @RestController
 @Slf4j
-@RequestMapping("/employee")
-public class EmployeeController {
+@RequestMapping("/employee2")
+public class EmployeeController2 {
     @Autowired
     private EmployeeService employeeService;
 
@@ -42,14 +38,11 @@ public class EmployeeController {
      */
     @PostMapping("/login")
     public ReturnResult<Employee> userLogin(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
-        // 我们登录成功以后，需要将用户信息保存到session中
-        // 我们后期寻找用户的信息，直接httpServletRequest调用get即可
         String employeePassword = employee.getPassword();// 获取密码
         employeePassword = DigestUtils.md5DigestAsHex(employeePassword.getBytes());// 密码通过MD5加密，然后保存回去
         LambdaQueryWrapper<Employee> chainWrapper = new LambdaQueryWrapper<>();
         chainWrapper.eq(Employee::getUsername, employee.getUsername());// 这里是eq，不是select
         Employee serviceOne = employeeService.getOne(chainWrapper);
-// getone的前提是我们的数据库，已经对其做好了唯一约束
 
         if (serviceOne == null) {
             return ReturnResult.sendError("该用户不存在！");
@@ -61,16 +54,8 @@ public class EmployeeController {
             return ReturnResult.sendError("员工账号停用");
         }
         log.info("登录成功");
-        // httpServletRequest.getSession().setAttribute("employeeId", employee.getId());
-        // 注意一下这里，要保存的是数据库查询得到的结果
-        // 不是登录过程中，传递过来的登录信息
-        // 之前我们保存到mysql中的是加密后的密码e10adc3949ba59abbe56e057f20f883e
-        // 所以这里是通过"9d022c5b-c604-40ec-80a7-1bb51d502543"
         httpServletRequest.getSession().setAttribute("employeeInfo", serviceOne.getId());
 
-        // return employeeReturnResult.setReturnData(employee);
-        // 不是直接使用set方式来保存对象
-        // 而是直接调用静态方法，保存上面返回的数据
         return ReturnResult.sendSuccess(serviceOne);
     }
 
@@ -82,10 +67,7 @@ public class EmployeeController {
      */
     @PostMapping("/logout")
     public ReturnResult<String> logout(HttpServletRequest httpServletRequest) {
-        // 我们前面登录的时候，使用了session
-        // 这里直接去session中拿到用户数据就可以校验和设置退出功能
         httpServletRequest.getSession().removeAttribute("employeeInfo");
-        // 直接拿到之前添加的session就可以完成移除操作
         return ReturnResult.sendSuccess("退出成功");
     }
 
@@ -97,24 +79,16 @@ public class EmployeeController {
      */
     @PostMapping
     public ReturnResult<String> saveEmployee(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
-// 因为前端的数据是json形式的，所以这里必须添加RequestBody才能正常封装
         log.info("新增员工：" + employee.toString());
-// employee.setPassword("123456");// 设置员工的初试密码
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));// 需要加密
-// employee.setCreateTime(Date.from(LocalTime.now()));
-        employee.setCreateTime(new Date());
-        employee.setUpdateTime(new Date());
-        // 获取创建和更新时间
-// log.info("当前的id为：" + httpServletRequest.getSession().getId());
+        // 因为我们在实体类中已经添加了自动新增和自动插入的fill属性，同时在common中做了一个拦截器
+        // 所以下面的四个属性全部都可以自动完成，这是mybatisPlus框架提供的服务
+        // employee.setCreateTime(new Date());
+        // employee.setUpdateTime(new Date());
+        // employee.setCreateUser(id);
+        // employee.setUpdateUser(id);
         log.info("当前的id为：" + httpServletRequest.getSession().getAttribute("employeeInfo"));
         Long id = (Long) httpServletRequest.getSession().getAttribute("employeeInfo");
-// 这里直接从getAttribute中，就可以直接拿到里面的id和所有信息
-        employee.setCreateUser(id);
-// 111111111111111111
-// 18912341234
-        // 获取具体的id
-        employee.setUpdateUser(id);
-// 因为需要存到数据库中，所以需要调用一下service
         employeeService.save(employee);
         return ReturnResult.sendSuccess("新增一个用户");
     }
@@ -132,7 +106,6 @@ public class EmployeeController {
         log.info("我是page的数据：{}，我是pageSize的数据：{}，我是姓名{}", page, pageSize, name);
         Page page1 = new Page(page, pageSize);
         LambdaQueryWrapper<Employee> lambdaQueryWrapper = new LambdaQueryWrapper();
-// x.eq(Employee::getName, name)
         if (name != null) {
             lambdaQueryWrapper.like(Employee::getName, name);
         }

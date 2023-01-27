@@ -2,6 +2,7 @@ package junw.filter;
 
 import com.alibaba.fastjson.JSON;
 import junw.common.ReturnResult;
+import junw.common.ThreadLocalBaseContent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpRequest;
 import org.springframework.util.AntPathMatcher;
@@ -38,9 +39,15 @@ public class LoginCheckFliter implements Filter {
      */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
+
+        long threadId = Thread.currentThread().getId();
+        log.info("我的线程id：" + threadId);
+        Long userId = (Long) httpServletRequest.getSession().getAttribute("employeeInfo");
+        ThreadLocalBaseContent.setUserId(userId);// 直接将session中的数据保存到线程中
         String requestURI = httpServletRequest.getRequestURI();
         String[] requestUrls = {"/employee/login", "/employee/logout", "/backend/**", "/front/**"};
 
