@@ -65,7 +65,7 @@ public class EmployeeController {
         // 注意一下这里，要保存的是数据库查询得到的结果
         // 不是登录过程中，传递过来的登录信息
         // 之前我们保存到mysql中的是加密后的密码e10adc3949ba59abbe56e057f20f883e
-        // 所以这里是通过
+        // 所以这里是通过"9d022c5b-c604-40ec-80a7-1bb51d502543"
         httpServletRequest.getSession().setAttribute("employeeInfo", serviceOne.getId());
 
         // return employeeReturnResult.setReturnData(employee);
