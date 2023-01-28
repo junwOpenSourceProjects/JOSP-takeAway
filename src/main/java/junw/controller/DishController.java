@@ -27,22 +27,10 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/dish")
 public class DishController {
-    @Autowired
-    private DishService dishService;
+	@Autowired
+	private DishService dishService;
 
-    @Autowired
-    private DishFlavorService dishFlavorService;
-
-//    @PutMapping("/")
-//    public ReturnResult<String> update(@RequestBody Category category) {
-//        log.info("修改分类信息"+category);
-//        CategoryService
-//        return null;
-//    }
-
-
-//    public ReturnResult<List<Category>> listReturnResult() {
-//
-//    }
+	@Autowired
+	private DishFlavorService dishFlavorService;
 
 }
