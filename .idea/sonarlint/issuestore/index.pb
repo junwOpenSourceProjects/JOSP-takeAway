@@ -39,8 +39,6 @@ _
 /src/main/java/junw/service/EmployeeService.java,c\b\cbcea84c41461a6d8affb6c2dd2de6125694adb5
 w
 G.idea/sonarlint/issuestore/2/5/25095409c9b8b1e579eaeb4b3dc38dfb96cbd986,4\4\44ea65d003fb2797ff694e0511b25175c72ec0b7
-S
-#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 w
 G.idea/sonarlint/issuestore/8/1/81766bc6722010df19ed257330ae54f683667218,4\b\4b1162cf4209a26a6690fff93ff265467dbdfed2
 w
@@ -75,8 +73,6 @@ g
 +src/main/java/junw/service/DishService.java,8\b\8ba50d0a2d5794543910e02f955312c64ae8d951
 ^
 .src/main/java/junw/service/SetMealService.java,9\b\9b0851120664b24f8573104ab0f4d2bf5cc3b5d8
-d
-4src/main/java/junw/controller/SetMealController.java,3\f\3fcb5e0d5a6dc14186e45407d98f2c4411cc8361
 _
 /src/main/java/junw/service/CategoryService.java,b\a\bab13d5bea5057a15b076a1ec0a9cc0419fffa58
 ^
@@ -87,3 +83,7 @@ e
 5src/main/java/junw/common/GlobalExceptionHandler.java,1\4\14b409bcce46a289611103b847b95954c575bf0a
 Y
 )src/main/java/junw/mapper/DishMapper.java,6\6\660de1eb90a350068623de13baa7076a42accd3c
+d
+4src/main/java/junw/controller/SetMealController.java,3\f\3fcb5e0d5a6dc14186e45407d98f2c4411cc8361
+e
+5src/main/java/junw/controller/CategoryController.java,0\7\071a10ba0fca6448793a74ce9e1118d5ec90062e
