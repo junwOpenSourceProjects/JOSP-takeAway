@@ -17,3 +17,5 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: assign_id
+reggie:
+  common-path: C:\Users\junw\Desktop\demoFile\
