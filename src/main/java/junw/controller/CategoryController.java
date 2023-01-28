@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by Intellij IDEA.
  * Project:reggie_takeaway
@@ -84,4 +86,13 @@ public class CategoryController {
         categoryService.updateById(category);
         return ReturnResult.sendSuccess("修改分类信息成功");
     }
+
+
+    @GetMapping("/list")
+    public ReturnResult<List<Category>> listCategory(@RequestBody Category category) {
+        log.info("修改分类信息" + category);
+        return null;
+    }
+
+
 }

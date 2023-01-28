@@ -1,10 +1,18 @@
 package junw.controller;
 
+import junw.common.ReturnResult;
+import junw.entity.Category;
+import junw.service.CategoryService;
+import junw.service.DishFlavorService;
 import junw.service.DishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by Intellij IDEA.
@@ -22,7 +30,19 @@ public class DishController {
     @Autowired
     private DishService dishService;
 
+    @Autowired
+    private DishFlavorService dishFlavorService;
+
+//    @PutMapping("/")
+//    public ReturnResult<String> update(@RequestBody Category category) {
+//        log.info("修改分类信息"+category);
+//        CategoryService
+//        return null;
+//    }
 
 
+//    public ReturnResult<List<Category>> listReturnResult() {
+//
+//    }
 
 }
