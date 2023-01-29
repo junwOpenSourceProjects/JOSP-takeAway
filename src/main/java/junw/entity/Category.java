@@ -12,49 +12,49 @@ import lombok.Data;
  */
 @Data
 public class Category implements Serializable {
-    /**
-     * 主键
-     */
-    private Long id;
+	/**
+	 * 主键
+	 */
+	private Long id;
 
-    /**
-     * 类型   1 菜品分类 2 套餐分类
-     */
-    private Integer type;
+	/**
+	 * 类型   1 菜品分类 2 套餐分类
+	 */
+	private Integer type;
 
-    /**
-     * 分类名称
-     */
-    private String name;
+	/**
+	 * 分类名称
+	 */
+	private String name;
 
-    /**
-     * 顺序
-     */
-    private Integer sort;
+	/**
+	 * 顺序
+	 */
+	private Integer sort;
 
-    /**
-     * 创建时间
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+	/**
+	 * 创建时间
+	 */
+	@TableField(fill = FieldFill.INSERT)
+	private Date createTime;
 
-    /**
-     * 更新时间
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+	/**
+	 * 更新时间
+	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
+	private Date updateTime;
 
-    /**
-     * 创建人
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private Long createUser;
+	/**
+	 * 创建人
+	 */
+	@TableField(fill = FieldFill.INSERT)
+	private Long createUser;
 
-    /**
-     * 修改人
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long updateUser;
+	/**
+	 * 修改人
+	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
+	private Long updateUser;
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 }

@@ -13,79 +13,79 @@ import lombok.Data;
  */
 @Data
 public class Dish implements Serializable {
-    /**
-     * 主键
-     */
-    private Long id;
+	/**
+	 * 主键
+	 */
+	private Long id;
 
-    /**
-     * 菜品名称
-     */
-    private String name;
+	/**
+	 * 菜品名称
+	 */
+	private String name;
 
-    /**
-     * 菜品分类id
-     */
-    private Long categoryId;
+	/**
+	 * 菜品分类id
+	 */
+	private Long categoryId;
 
-    /**
-     * 菜品价格
-     */
-    private BigDecimal price;
+	/**
+	 * 菜品价格
+	 */
+	private BigDecimal price;
 
-    /**
-     * 商品码
-     */
-    private String code;
+	/**
+	 * 商品码
+	 */
+	private String code;
 
-    /**
-     * 图片
-     */
-    private String image;
+	/**
+	 * 图片
+	 */
+	private String image;
 
-    /**
-     * 描述信息
-     */
-    private String description;
+	/**
+	 * 描述信息
+	 */
+	private String description;
 
-    /**
-     * 0 停售 1 起售
-     */
-    private Integer status;
+	/**
+	 * 0 停售 1 起售
+	 */
+	private Integer status;
 
-    /**
-     * 顺序
-     */
-    private Integer sort;
+	/**
+	 * 顺序
+	 */
+	private Integer sort;
 
-    /**
-     * 创建时间
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+	/**
+	 * 创建时间
+	 */
+	@TableField(fill = FieldFill.INSERT)
+	private Date createTime;
 
-    /**
-     * 更新时间
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+	/**
+	 * 更新时间
+	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
+	private Date updateTime;
 
-    /**
-     * 创建人
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private Long createUser;
+	/**
+	 * 创建人
+	 */
+	@TableField(fill = FieldFill.INSERT)
+	private Long createUser;
 
-    /**
-     * 修改人
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long updateUser;
+	/**
+	 * 修改人
+	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
+	private Long updateUser;
 
-    /**
-     * 是否删除
-     */
-    private Integer isDeleted;
+	/**
+	 * 是否删除
+	 */
+	private Integer isDeleted;
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 }

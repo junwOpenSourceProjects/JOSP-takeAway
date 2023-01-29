@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/setMeal")
 public class SetMealController {
-    @Autowired
-    private SetMealService setMealService;
+	@Autowired
+	private SetMealService setMealService;
 
 
 }

@@ -13,10 +13,10 @@ import junw.entity.Category;
  * @description
  */
 public interface CategoryService extends IService<Category> {
-    /**
-     * 根据id删除菜品，确定是否有关联
-     *
-     * @param id id
-     */
-    void removeCategory(Long id);
+	/**
+	 * 根据id删除菜品，确定是否有关联
+	 *
+	 * @param id id
+	 */
+	void removeCategory(Long id);
 }
