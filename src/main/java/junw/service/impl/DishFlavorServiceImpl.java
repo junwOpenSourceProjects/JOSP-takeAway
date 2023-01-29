@@ -1,5 +1,6 @@
 package junw.service.impl;
 
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import junw.entity.DishFlavor;
 import junw.mapper.DishFlavorMapper;
@@ -16,5 +17,5 @@ import org.springframework.stereotype.Service;
  * @description
  */
 @Service
-public class DishFlavorServiceImpl extends ServiceImpl<DishFlavorMapper,DishFlavor> implements DishFlavorService {
+public class DishFlavorServiceImpl extends ServiceImpl<DishFlavorMapper, DishFlavor> implements DishFlavorService {
 }
