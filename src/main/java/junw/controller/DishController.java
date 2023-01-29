@@ -1,5 +1,6 @@
 package junw.controller;
 
+import junw.service.DishFlavorService;
 import junw.service.DishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class DishController {
     private DishService dishService;
 
 
-
+    // @Autowired
+    // private DishFlavorService dishFlavorService;
 
 }

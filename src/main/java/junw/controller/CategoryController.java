@@ -84,4 +84,20 @@ public class CategoryController {
         categoryService.updateById(category);
         return ReturnResult.sendSuccess("修改分类信息成功");
     }
+    /**
+     * 修改分类信息
+     *
+     * @param category 实体类
+     * @return 类别list
+     */
+    // @GetMapping("/list")
+    // public ReturnResult<List<Category>> listCategory(@RequestBody Category category) {
+    // 	log.info("修改分类信息" + category);
+    // 	LambdaQueryWrapper<Category> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+    // 	lambdaQueryWrapper.eq(category.getType() != null, Category::getType, category.getType());
+    // 	lambdaQueryWrapper.orderByAsc(Category::getSort).orderByDesc(Category::getUpdateTime);
+    // 	List<Category> categoryList = categoryService.list(lambdaQueryWrapper);// 使用mybatis框架，直接返回一个list
+    // 	log.info("返回成功");
+    // 	return ReturnResult.sendSuccess(categoryList);
+    // }
 }
