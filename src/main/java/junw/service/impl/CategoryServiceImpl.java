@@ -52,6 +52,5 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
             throw new CustomException("还有关联套餐，不允许删除");
         }
         super.removeById(id);
-
     }
 }
