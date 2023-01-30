@@ -65,3 +65,17 @@ e
 +src/main/java/junw/common/ReturnResult.java,4\2\42460f445a0630ff622128c8042be8ebc8215a28
 g
 7src/main/java/junw/config/MybatisPlusConfiguration.java,c\e\ce4a1e0ccc47b4378781553e162d4b7df15faa91
+a
+1src/main/java/junw/controller/FileController.java,7\6\761de2e30833442668a48c5d9dfc8e195fa61d69
+e
+5src/main/java/junw/controller/CategoryController.java,0\7\071a10ba0fca6448793a74ce9e1118d5ec90062e
+S
+#src/main/java/junw/dto/DishDto.java,d\1\d11b3d415e16a1a838f6fd57176957a70f662895
+[
++src/main/java/junw/service/DishService.java,8\b\8ba50d0a2d5794543910e02f955312c64ae8d951
+Y
+)src/main/java/junw/ReggieApplication.java,2\0\208e6ad06b6a5d99805233652e4750cde72c62b5
+d
+4src/main/java/junw/service/impl/DishServiceImpl.java,8\0\80521265f6faf5c96fb12b080e146b0a310946c1
+a
+1src/main/java/junw/controller/DishController.java,3\c\3c24975b0269ca47d9d25bc01002fe19a09ad5f9
