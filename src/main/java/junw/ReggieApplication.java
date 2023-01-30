@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Created by Intellij IDEA.
@@ -17,6 +18,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @Slf4j
 @SpringBootApplication
 @ServletComponentScan
+@EnableTransactionManagement
 public class ReggieApplication {
 	// @Slf4j是lombok提供的日志注解
 	// 添加了ServletComponentScan注解以后，我们才能扫描到自己的webfilter注解

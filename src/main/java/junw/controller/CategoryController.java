@@ -6,9 +6,14 @@ import junw.common.ReturnResult;
 import junw.entity.Category;
 import junw.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -88,13 +93,13 @@ public class CategoryController {
 	}
 
 	/**
-	 * 修改分类信息
+	 * 根据条件查询分类信息
 	 *
 	 * @param category 实体类
 	 * @return 类别list
 	 */
 	@GetMapping("/list")
-	public ReturnResult<List<Category>> listCategory(@RequestBody Category category) {
+	public ReturnResult<List<Category>> listCategory(Category category) {
 		log.info("修改分类信息" + category);
 		LambdaQueryWrapper<Category> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(category.getType() != null, Category::getType, category.getType());
