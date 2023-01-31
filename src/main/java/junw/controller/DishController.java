@@ -132,6 +132,7 @@ public class DishController {
 		// 进一步查询菜式底下的套餐都有哪些
 		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
+		lambdaQueryWrapper.eq(Dish::getStatus,1);
 		lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
 		List<Dish> dishList = dishService.list(lambdaQueryWrapper);
 		return ReturnResult.sendSuccess(dishList);

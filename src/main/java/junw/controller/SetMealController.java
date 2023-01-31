@@ -1,9 +1,13 @@
 package junw.controller;
 
+import junw.common.ReturnResult;
+import junw.dto.SetmealDto;
 import junw.service.SetMealService;
 import junw.service.SetmealDishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +30,12 @@ public class SetMealController {
 	@Autowired
 	private SetmealDishService setmealDishService;
 
+	@PostMapping
+	public ReturnResult<String> saveOne(@RequestBody SetmealDto setmealDto) {
+		log.info("我是saveOne方法");
+		setMealService.saveOneDish(setmealDto);
+
+		return ReturnResult.sendSuccess("新增套餐");
+	}
 
 }

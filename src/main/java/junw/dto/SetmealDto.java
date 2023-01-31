@@ -1,6 +1,7 @@
 package junw.dto;
 
 import junw.entity.Setmeal;
+import junw.entity.SetmealDish;
 import lombok.Data;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class SetmealDto extends Setmeal {
 	/**
 	 * setMeal列表
 	 */
-	private List<Setmeal> setmealList;
+	private List<SetmealDish> setmealDishList;
 
 
 	/**
