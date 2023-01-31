@@ -1,7 +1,7 @@
 package junw.controller;
 
-import junw.common.ReturnResult;
 import junw.service.SetMealService;
+import junw.service.SetmealDishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
-@RequestMapping("/setMeal")
+@RequestMapping("/setmeal")
 public class SetMealController {
 	@Autowired
 	private SetMealService setMealService;
+
+	@Autowired
+	private SetmealDishService setmealDishService;
 
 
 }
