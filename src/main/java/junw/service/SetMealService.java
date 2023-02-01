@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import junw.dto.SetmealDto;
 import junw.entity.Setmeal;
 
+import java.util.List;
+
 /**
  * Created by Intellij IDEA.
  * Project:reggie_takeaway
@@ -21,4 +23,10 @@ public interface SetMealService extends IService<Setmeal> {
 	 * @param setmealDto 实体类
 	 */
 	void saveOneDish(SetmealDto setmealDto);
+
+	/**
+	 * 删除套餐
+	 * @param ids id列
+	 */
+	void removeWithDish(List<Long> ids);
 }
