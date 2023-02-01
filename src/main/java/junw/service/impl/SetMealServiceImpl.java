@@ -40,6 +40,7 @@ public class SetMealServiceImpl extends ServiceImpl<SetMealMapper, Setmeal> impl
 	public void saveOneDish(SetmealDto setmealDto) {
 		this.save(setmealDto);// 保存setMeal信息
 		List<SetmealDish> setmealDishList = setmealDto.getSetmealDishList();
+
 		setmealDishList.stream().map((item) -> {
 			item.setSetmealId(String.valueOf(setmealDto.getId()));
 			return item;
