@@ -4,10 +4,13 @@ import com.alibaba.fastjson.JSON;
 import junw.common.ReturnResult;
 import junw.common.ThreadLocalBaseContent;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpRequest;
 import org.springframework.util.AntPathMatcher;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +52,9 @@ public class LoginCheckFliter implements Filter {
 		Long userId = (Long) httpServletRequest.getSession().getAttribute("employeeInfo");
 		ThreadLocalBaseContent.setUserId(userId);// 直接将session中的数据保存到线程中
 		String requestURI = httpServletRequest.getRequestURI();
-		String[] requestUrls = {"/employee/login", "/employee/logout", "/backend/**", "/front/**"};
+		String[] requestUrls = {"/employee/login", "/employee/logout", "/backend/**", "/front/**", "/user/sendMsg", "user/login"};
+		// "/user/sendMsg"移动端发送短信
+		// "user/login"移动端用户登录
 
 
 		log.info("我是LoginCheckFliter拦截，拦截的请求是{}", httpServletRequest.getRequestURL());
@@ -66,6 +71,12 @@ public class LoginCheckFliter implements Filter {
 		if (httpServletRequest.getSession().getAttribute("employeeInfo") != null) {
 			filterChain.doFilter(httpServletRequest, httpServletResponse);
 			log.info("登录成功，当前用户为：" + httpServletRequest.getSession().getAttribute("employeeInfo"));
+			return;
+		}
+		// 新增移动端用户的登录操作
+		if (httpServletRequest.getSession().getAttribute("user") != null) {
+			filterChain.doFilter(httpServletRequest, httpServletResponse);
+			log.info("登录成功，当前用户为：" + httpServletRequest.getSession().getAttribute("user"));
 			return;
 		}
 		// httpServletResponse.getWriter().write(JSON.toJSONString(ReturnResult.sendError("登录错误")));
