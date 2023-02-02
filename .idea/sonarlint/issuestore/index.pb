@@ -13,8 +13,6 @@ h
 8src/main/java/junw/service/impl/EmployeeServiceImpl.java,7\9\79ab1e55c55a3cfada0a665b88965dd00206eccc
 j
 :src/main/java/junw/service/impl/DishFlavorServiceImpl.java,f\f\ff1191008abbe1077fb3c8984e027102d2a1f7fe
-h
-8src/main/java/junw/service/impl/CategoryServiceImpl.java,f\0\f004e61ea00f495b11e9f847f89194ba5877e98d
 \
 ,src/main/java/junw/mapper/SetMealMapper.java,5\0\50b6256acadf7b8d2b96b3a39cbf0e1764e25001
 ]
@@ -25,8 +23,6 @@ _
 /src/main/java/junw/mapper/DishFlavorMapper.java,4\9\49ee04c89b9c6098306306ebc035cc78f98b2816
 ]
 -src/main/java/junw/mapper/CategoryMapper.java,0\e\0eac0d921a2870703b79fd9b4c83df565fed16e9
-W
-'src/main/java/junw/entity/Category.java,e\f\ef7fdab35e95fced5b4f94c8637e2febad3a9bb2
 S
 #src/main/java/junw/entity/Dish.java,a\e\aeae2cf7a56e10b9b496908b3e8dc9304cbe854f
 Y
@@ -55,8 +51,6 @@ g
 7src/main/java/junw/config/MybatisPlusConfiguration.java,c\e\ce4a1e0ccc47b4378781553e162d4b7df15faa91
 a
 1src/main/java/junw/controller/FileController.java,7\6\761de2e30833442668a48c5d9dfc8e195fa61d69
-e
-5src/main/java/junw/controller/CategoryController.java,0\7\071a10ba0fca6448793a74ce9e1118d5ec90062e
 Y
 )src/main/java/junw/ReggieApplication.java,2\0\208e6ad06b6a5d99805233652e4750cde72c62b5
 [
@@ -101,3 +95,5 @@ f
 6src/main/java/junw/controller/EmployeeController2.java,1\6\16e73eb6be107d2713557db567f44c97fec5fef8
 _
 /src/main/java/junw/utils/ValidateCodeUtils.java,0\9\09b3125e8b760d0a29c8196e3a878ccc55763a69
+_
+/src/main/java/junw/filter/LoginCheckFliter.java,7\6\769892215e63c724d0359b11c8a02a5792f631c8

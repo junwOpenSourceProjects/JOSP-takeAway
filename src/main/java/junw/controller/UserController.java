@@ -66,10 +66,6 @@ public class UserController {
 			}
 			return ReturnResult.sendSuccess(one);
 		}
-
-
 		return ReturnResult.sendError("发送失败");
 	}
-
-
 }
