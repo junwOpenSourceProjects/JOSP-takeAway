@@ -35,6 +35,12 @@ public class AddressBookController {
 	@Autowired
 	private AddressBookService addressBookService;
 
+	/**
+	 * 保存地址
+	 *
+	 * @param addressBook 实体类
+	 * @return 地址
+	 */
 	@PostMapping
 	public ReturnResult<AddressBook> save(@RequestBody AddressBook addressBook) {
 		addressBook.setUserId(ThreadLocalBaseContent.getUserId());// 获取用户id
@@ -45,6 +51,12 @@ public class AddressBookController {
 		return ReturnResult.sendSuccess(addressBook);
 	}
 
+	/**
+	 * 设置默认地址
+	 *
+	 * @param addressBook 实体类
+	 * @return 地址
+	 */
 	@PutMapping("/default")
 	public ReturnResult<AddressBook> setDefualtAddress(@RequestBody AddressBook addressBook) {
 		// addressBookService
@@ -59,6 +71,12 @@ public class AddressBookController {
 		return ReturnResult.sendSuccess(addressBook);
 	}
 
+	/**
+	 * 根据id获取地址
+	 *
+	 * @param id id
+	 * @return 地址
+	 */
 	@GetMapping("/{id}")
 	public ReturnResult<AddressBook> getOne(@PathVariable long id) {
 		AddressBook serviceById = addressBookService.getById(id);
@@ -68,6 +86,11 @@ public class AddressBookController {
 		return ReturnResult.sendError("查询结果为空");
 	}
 
+	/**
+	 * 获取默认
+	 *
+	 * @return 地址
+	 */
 	@GetMapping("default")
 	public ReturnResult<AddressBook> getDefault() {
 		LambdaQueryWrapper<AddressBook> lambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -80,6 +103,12 @@ public class AddressBookController {
 		return ReturnResult.sendError("结果错误");
 	}
 
+	/**
+	 * 获取一个地址集合
+	 *
+	 * @param addressBook 实体类
+	 * @return 地址list
+	 */
 	@GetMapping("/list")
 	public ReturnResult<List<AddressBook>> list(AddressBook addressBook) {
 		addressBook.setUserId(ThreadLocalBaseContent.getUserId());

@@ -34,9 +34,9 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	/**
-	 * 我是添加菜单分类
+	 * 我是添加菜单和套餐
 	 *
-	 * @param category
+	 * @param category 实体类
 	 * @return 成功失败
 	 */
 	@PostMapping

@@ -119,6 +119,12 @@ public class DishController {
 		return ReturnResult.sendSuccess(dishDtoById);
 	}
 
+	/**
+	 * 更新一条数据
+	 *
+	 * @param dishDto 实体类
+	 * @return 更新结果
+	 */
 	@PutMapping
 	public ReturnResult<String> updateOne(@RequestBody DishDto dishDto) {
 		// log.info("我是save方法中提交的数据：" + dishDto);
@@ -126,13 +132,19 @@ public class DishController {
 		return ReturnResult.sendSuccess("更新成功");
 	}
 
+	/**
+	 * 查询dish列表
+	 *
+	 * @param dish 实体类
+	 * @return 实体类list
+	 */
 	@GetMapping("/list")
 	public ReturnResult<List<Dish>> getDishList(Dish dish) {
 		// 每次点击的时候，都会发送一次请求，我们根据发送过来的菜式
 		// 进一步查询菜式底下的套餐都有哪些
 		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
-		lambdaQueryWrapper.eq(Dish::getStatus,1);
+		lambdaQueryWrapper.eq(Dish::getStatus, 1);
 		lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
 		List<Dish> dishList = dishService.list(lambdaQueryWrapper);
 		return ReturnResult.sendSuccess(dishList);
