@@ -47,8 +47,6 @@ k
 ;src/main/java/junw/service/impl/SetmealDishServiceImpl.java,8\a\8a268a536610778239dc61a35b386a23f04890c7
 V
 &src/main/java/junw/entity/Setmeal.java,b\6\b6dd0fc15cf8fd8f1a5f5f8f0b65baaa1a20ff26
-Z
-*src/main/java/junw/entity/SetmealDish.java,4\8\48ebde48cdce1d4bec8ea115658001033c45d24e
 V
 &src/main/java/junw/dto/SetmealDto.java,2\2\22336ce844d370493fd921cb8de21d8e42a5698d
 b
