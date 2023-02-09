@@ -7,6 +7,9 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author junw
+ */
 @Data
 public class AddressBook implements Serializable {
 	/**

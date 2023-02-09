@@ -42,7 +42,7 @@ public class AddressBookController {
 	 * @return 地址
 	 */
 	@PostMapping
-	public ReturnResult<AddressBook> save(@RequestBody AddressBook addressBook) {
+	public ReturnResult<AddressBook> saveOne(@RequestBody AddressBook addressBook) {
 		addressBook.setUserId(ThreadLocalBaseContent.getUserId());// 获取用户id
 
 		log.info("我保存了一个用户地址");
@@ -58,7 +58,7 @@ public class AddressBookController {
 	 * @return 地址
 	 */
 	@PutMapping("/default")
-	public ReturnResult<AddressBook> setDefualtAddress(@RequestBody AddressBook addressBook) {
+	public ReturnResult<AddressBook> setDefaultAddress(@RequestBody AddressBook addressBook) {
 		// addressBookService
 		LambdaUpdateWrapper<AddressBook> lambdaUpdateWrapper = new LambdaUpdateWrapper<>();
 		// 注意这里是update，不是query

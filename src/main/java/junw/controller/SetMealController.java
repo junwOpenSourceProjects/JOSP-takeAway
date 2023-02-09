@@ -100,4 +100,18 @@ public class SetMealController {
 		return ReturnResult.sendSuccess("删除成功");
 	}
 
+
+	@GetMapping("list")
+	public ReturnResult<List<Setmeal>> getSetmealList(Setmeal setmeal) {
+		// @RequestBody 不是随便加的
+		// 如果参数是直接跟在请求后面，那么不需要
+		LambdaQueryWrapper<Setmeal> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(setmeal.getCategoryId() != null, Setmeal::getCategoryId, setmeal.getCategoryId());
+		lambdaQueryWrapper.eq(setmeal.getStatus() != null, Setmeal::getStatus, setmeal.getStatus());
+		lambdaQueryWrapper.orderByDesc(Setmeal::getUpdateTime);
+
+		List<Setmeal> setmealList = setMealService.list(lambdaQueryWrapper);
+		return ReturnResult.sendSuccess(setmealList);
+	}
+
 }

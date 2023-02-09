@@ -6,6 +6,7 @@ import junw.common.ReturnResult;
 import junw.dto.DishDto;
 import junw.entity.Category;
 import junw.entity.Dish;
+import junw.entity.DishFlavor;
 import junw.service.CategoryService;
 import junw.service.DishFlavorService;
 import junw.service.DishService;
@@ -148,5 +149,38 @@ public class DishController {
 		lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
 		List<Dish> dishList = dishService.list(lambdaQueryWrapper);
 		return ReturnResult.sendSuccess(dishList);
+	}
+
+	/**
+	 * 提取dish列表
+	 *
+	 * @param dish 实体
+	 * @return dishDto的list
+	 */
+	@GetMapping("/list2")
+	public ReturnResult<List<DishDto>> getDishDtoList(Dish dish) {
+		// todo 这里上下两个方法是重复的，我只是没有删除而已
+		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
+		lambdaQueryWrapper.eq(Dish::getStatus, 1);
+		lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+		List<Dish> dishList = dishService.list(lambdaQueryWrapper);
+		List<DishDto> dishDtoList = dishList.stream().map((item) -> {
+			DishDto dishDto = new DishDto();
+			BeanUtils.copyProperties(item, dishDto);
+			Long categoryId = item.getCategoryId();
+			Category byId = categoryService.getById(categoryId);
+			if (byId != null) {
+				String byIdName = byId.getName();
+				dishDto.setName(byIdName);
+			}
+			Long dishId = item.getId();
+			LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
+			lambdaQueryWrapper1.eq(DishFlavor::getId, dishId);
+			List<DishFlavor> dishFlavors = dishFlavorService.list(lambdaQueryWrapper1);
+			dishDto.setFlavors(dishFlavors);
+			return dishDto;
+		}).collect(Collectors.toList());
+		return ReturnResult.sendSuccess(dishDtoList);
 	}
 }
