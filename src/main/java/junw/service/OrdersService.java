@@ -13,4 +13,11 @@ import junw.entity.Orders;
  * @description
  */
 public interface OrdersService extends IService<Orders> {
+
+	/**
+	 * 用户下单
+	 *
+	 * @param orders 实体类
+	 */
+	public void submitOneOrder(Orders orders);
 }
