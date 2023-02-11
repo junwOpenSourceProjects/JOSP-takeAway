@@ -93,8 +93,6 @@ a
 1src/main/java/junw/controller/FileController.java,7\6\761de2e30833442668a48c5d9dfc8e195fa61d69
 e
 5src/main/java/junw/controller/EmployeeController.java,4\5\4554cf4fbb32da2bc0b497f75ed4e6a5e9df0f4b
-a
-1src/main/java/junw/controller/UserController.java,6\9\69a1c9d2c077926139b7ed7d13a8c905ac0ca13d
 e
 5src/main/java/junw/controller/CategoryController.java,0\7\071a10ba0fca6448793a74ce9e1118d5ec90062e
 S
@@ -146,5 +144,3 @@ c
 3src/main/java/junw/controller/OrdersController.java,0\1\01341d40e21c2464cf3621e5953bd5a5a51ea3f4
 ]
 -src/main/java/junw/service/OrdersService.java,a\8\a88c3e4d66a45b817e43d8029c0c3157ae75164d
-f
-6src/main/java/junw/service/impl/OrdersServiceImpl.java,e\1\e15996ce966d7d8b3ceedd1c027a140b92b0f2f8
