@@ -3,7 +3,19 @@ server:
 spring:
   application:
     name: reggie_takeaway
-  #    可以手动指定，不指定就是上面包名的默认名称
+  # 可以手动指定，不指定就是上面包名的默认名称
+  redis:
+    host: localhost
+    port: 6379
+    database: 0 #配置了16个数据库，这里使用的是0号数据库
+    jedis:
+      # redis连接池配置
+      pool:
+        max-active: 8 #最大连接数
+        max-wait: 1ms #阻塞最大等待时间
+        max-idle: 4 #最大空闲连接
+        min-idle: 0 #最小空闲连接
+  # password: 123456
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver

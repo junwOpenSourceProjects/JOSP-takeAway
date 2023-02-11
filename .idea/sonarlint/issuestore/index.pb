@@ -35,8 +35,6 @@ e
 5src/main/java/junw/config/SpringWebConfiguration.java,1\c\1cdf7b57a1bbd24c22003d847af85c31600bebb1
 g
 7src/main/java/junw/config/MybatisPlusConfiguration.java,c\e\ce4a1e0ccc47b4378781553e162d4b7df15faa91
-Y
-)src/main/java/junw/ReggieApplication.java,2\0\208e6ad06b6a5d99805233652e4750cde72c62b5
 [
 +src/main/java/junw/service/DishService.java,8\b\8ba50d0a2d5794543910e02f955312c64ae8d951
 d
@@ -51,8 +49,6 @@ V
 &src/main/java/junw/dto/SetmealDto.java,2\2\22336ce844d370493fd921cb8de21d8e42a5698d
 b
 2src/main/java/junw/service/SetmealDishService.java,9\7\97f781e589c9c0a7425a1bd866cde110b59a42ed
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 S
 #src/main/java/junw/entity/User.java,8\c\8c547811754740fdfd4887c0964d9f445cd3156f
 ^
