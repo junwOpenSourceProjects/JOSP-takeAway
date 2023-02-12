@@ -13,6 +13,7 @@ import junw.service.DishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -46,6 +49,9 @@ public class DishController {
 	@Autowired
 	private CategoryService categoryService;
 
+	@Autowired
+	private RedisTemplate redisTemplate;
+
 	/**
 	 * 保存一条数据
 	 *
@@ -56,6 +62,11 @@ public class DishController {
 	public ReturnResult<String> saveOne(@RequestBody DishDto dishDto) {
 		log.info("我是save方法中提交的数据：" + dishDto);
 		dishService.saveDishWithFlavor(dishDto);
+		// 和下面的update方法一样
+		// 直接清理掉缓存中的key
+		// 其实可以优化一下，直接从dto中拿到对应的key，然后定向清除
+		Set keys = redisTemplate.keys("dish_*");// 拿到所有dish开头的key
+		redisTemplate.delete(keys);// 删除所有对应key
 		return ReturnResult.sendSuccess("插入成功");
 	}
 
@@ -130,6 +141,9 @@ public class DishController {
 	public ReturnResult<String> updateOne(@RequestBody DishDto dishDto) {
 		// log.info("我是save方法中提交的数据：" + dishDto);
 		dishService.updateDishInfo(dishDto);
+
+		Set keys = redisTemplate.keys("dish_*");// 拿到所有dish开头的key
+		redisTemplate.delete(keys);// 删除所有对应key
 		return ReturnResult.sendSuccess("更新成功");
 	}
 
@@ -159,7 +173,6 @@ public class DishController {
 	 */
 	@GetMapping("/list2")
 	public ReturnResult<List<DishDto>> getDishDtoList(Dish dish) {
-		// todo 这里上下两个方法是重复的，我只是没有删除而已
 		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
 		lambdaQueryWrapper.eq(Dish::getStatus, 1);
@@ -181,6 +194,59 @@ public class DishController {
 			dishDto.setFlavors(dishFlavors);
 			return dishDto;
 		}).collect(Collectors.toList());
+		return ReturnResult.sendSuccess(dishDtoList);
+	}
+
+
+	/**
+	 * 提取dish列表，加入redis缓存
+	 *
+	 * @param dish 实体
+	 * @return dishDto的list
+	 */
+	@GetMapping("/list3")
+	public ReturnResult<List<DishDto>> getDishDtoList2(Dish dish) {
+		// 这里上下三个方法是重复的，我只是没有删除而已
+		// 用来看自己的接口迭代过程
+
+		// 需要说明一下：
+		// 如果多个用户同时使用系统，查询次数提高，数据库压力会非常大
+		// 这里就可以将我们查询到的list载入缓存中，避免重复查询
+
+		String redis_keys = "dish_" + dish.getCategoryId() + "_" + dish.getStatus();
+		List<DishDto> dishDtoList = (List<DishDto>) redisTemplate.opsForValue().get(redis_keys);
+		// 这里是强行转换一下，
+		// 将我们从缓存中拿到的数据放进去
+		if (dishDtoList != null) {
+			return ReturnResult.sendSuccess(dishDtoList);
+			// 如果缓存中有数据，直接返回即可
+		}
+		// 缓存没有数据，就完成一遍查询
+
+		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
+		lambdaQueryWrapper.eq(Dish::getStatus, 1);
+		lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+		List<Dish> dishList = dishService.list(lambdaQueryWrapper);
+		dishDtoList = dishList.stream().map((item) -> {
+			DishDto dishDto = new DishDto();
+			BeanUtils.copyProperties(item, dishDto);
+			Long categoryId = item.getCategoryId();
+			Category byId = categoryService.getById(categoryId);
+			if (byId != null) {
+				String byIdName = byId.getName();
+				dishDto.setName(byIdName);
+			}
+			Long dishId = item.getId();
+			LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
+			lambdaQueryWrapper1.eq(DishFlavor::getId, dishId);
+			List<DishFlavor> dishFlavors = dishFlavorService.list(lambdaQueryWrapper1);
+			dishDto.setFlavors(dishFlavors);
+			return dishDto;
+		}).collect(Collectors.toList());
+		redisTemplate.opsForValue().set(redis_keys, dishDtoList, 60, TimeUnit.MINUTES);
+		// 如果没有对应的数据，就将缓存结果保存为key-value
+
 		return ReturnResult.sendSuccess(dishDtoList);
 	}
 }

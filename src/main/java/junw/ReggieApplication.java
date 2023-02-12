@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -19,9 +20,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @ServletComponentScan
 @EnableTransactionManagement
+@EnableCaching
 public class ReggieApplication {
 	// @Slf4j是lombok提供的日志注解
 	// 添加了ServletComponentScan注解以后，我们才能扫描到自己的webfilter注解
+	// EnableCaching在启动类中添加，配置缓存
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReggieApplication.class, args);

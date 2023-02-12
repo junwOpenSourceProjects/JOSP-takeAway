@@ -22,6 +22,7 @@ public class SMSUtils {
 	 */
 	public static void sendMessage(String signName, String templateCode,String phoneNumbers,String param){
 		DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "", "");
+		// 这里要调用阿里云的短信服务，暂时没开通，所以不写
 		IAcsClient client = new DefaultAcsClient(profile);
 
 		SendSmsRequest request = new SendSmsRequest();
