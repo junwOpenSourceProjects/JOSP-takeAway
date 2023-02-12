@@ -140,3 +140,15 @@ c
 3src/main/java/junw/controller/OrdersController.java,0\1\01341d40e21c2464cf3621e5953bd5a5a51ea3f4
 ]
 -src/main/java/junw/service/OrdersService.java,a\8\a88c3e4d66a45b817e43d8029c0c3157ae75164d
+f
+6src/main/java/junw/service/impl/OrdersServiceImpl.java,e\1\e15996ce966d7d8b3ceedd1c027a140b92b0f2f8
+a
+1src/main/java/junw/controller/UserController.java,6\9\69a1c9d2c077926139b7ed7d13a8c905ac0ca13d
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+Y
+)src/main/java/junw/ReggieApplication.java,2\0\208e6ad06b6a5d99805233652e4750cde72c62b5
+N
+src/test/java/Jedis2Redis.java,e\c\ec59348e00ec11e38a2f8ab1f5793bbaca847362
+a
+1src/main/java/junw/config/RedisConfiguration.java,b\6\b677e602b85d58fb18ec7a15736e0387b520401e
