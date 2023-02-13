@@ -152,7 +152,3 @@ e
 5src/main/java/junw/controller/CategoryController.java,0\7\071a10ba0fca6448793a74ce9e1118d5ec90062e
 h
 8src/main/java/junw/controller/AddressBookController.java,6\3\633c4280c9495cbb72aac11a4a229a199c6af17a
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-b
-2src/main/java/junw/controller/CacheController.java,5\3\5322e54eebafd9dde0b3886557639017c688ca13
