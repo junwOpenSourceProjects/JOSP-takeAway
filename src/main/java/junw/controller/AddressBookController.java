@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 /**
@@ -31,6 +32,10 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/addressBook")
 public class AddressBookController {
+	@Autowired
+	private DataSource dataSource;
+	// 必须要注入一个数据源对象，否则读写分离无效
+
 
 	@Autowired
 	private AddressBookService addressBookService;
