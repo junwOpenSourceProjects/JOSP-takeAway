@@ -5,57 +5,52 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+/**
+ * @author junw
+ */
 @Data
 public class DishFlavor implements Serializable {
-	/**
-	 * 主键
-	 */
+
+	@ApiModelProperty("主键")
 	private Long id;
 
-	/**
-	 * 菜品
-	 */
+
+	@ApiModelProperty("菜品")
 	private Long dishId;
 
-	/**
-	 * 口味名称
-	 */
+
+	@ApiModelProperty("口味名称")
 	private String name;
 
-	/**
-	 * 口味数据list
-	 */
+
+	@ApiModelProperty("口味数据list")
 	private String value;
 
-	/**
-	 * 创建时间
-	 */
+
 	@TableField(fill = FieldFill.INSERT)
+	@ApiModelProperty("创建时间")
 	private Date createTime;
 
-	/**
-	 * 更新时间
-	 */
+
 	@TableField(fill = FieldFill.INSERT_UPDATE)
+	@ApiModelProperty("更新时间")
 	private Date updateTime;
 
-	/**
-	 * 创建人
-	 */
+
 	@TableField(fill = FieldFill.INSERT)
+	@ApiModelProperty("创建人")
 	private Long createUser;
 
-	/**
-	 * 修改人
-	 */
+
 	@TableField(fill = FieldFill.INSERT_UPDATE)
+	@ApiModelProperty("修改人")
 	private Long updateUser;
 
-	/**
-	 * 是否删除
-	 */
+
+	@ApiModelProperty("是否删除")
 	private Integer isDeleted;
 
 	private static final long serialVersionUID = 1L;

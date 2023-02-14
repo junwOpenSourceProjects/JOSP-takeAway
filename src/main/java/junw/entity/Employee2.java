@@ -3,6 +3,7 @@ package junw.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,50 +18,42 @@ import java.util.Date;
 @Data
 public class Employee2 implements Serializable {
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 主键
-	 */
+
 	@TableField(select = false)
 	@TableId
+	@ApiModelProperty("主键")
 	private Long id;
-	/**
-	 * 姓名
-	 */
+
+	@ApiModelProperty("姓名")
 	private String name;
-	/**
-	 * 用户名
-	 */
+
+	@ApiModelProperty("用户名")
 	private String username;
-	/**
-	 * 密码
-	 */
+
+	@ApiModelProperty("密码")
 	private String password;
-	/**
-	 * 手机号
-	 */
+
+	@ApiModelProperty("手机号")
 	private String phone;
-	/**
-	 * 性别
-	 */
+
+	@ApiModelProperty("性别")
 	private String sex;
-	/**
-	 * 身份证号
-	 */
+
+	@ApiModelProperty("身份证号")
 	private String idNumber;
-	/**
-	 * 状态 0:禁用，1:正常
-	 */
+
+	@ApiModelProperty("状态 0:禁用，1:正常")
 	private Integer status;
 	/**
 	 * 创建时间
 	 * 插入和更新的同时，自动填充该字段
 	 */
 	@TableField(fill = FieldFill.INSERT)
+	@ApiModelProperty("创建时间")
 	private Date createTime;
-	/**
-	 * 更新时间
-	 */
+
 	@TableField(fill = FieldFill.INSERT_UPDATE)
+	@ApiModelProperty("更新时间")
 	private Date updateTime;
 	/**
 	 * 创建人
@@ -68,11 +61,11 @@ public class Employee2 implements Serializable {
 	 * 插入的时候自动填充字段
 	 */
 	@TableField(fill = FieldFill.INSERT)
+	@ApiModelProperty("创建人")
 	private Long createUser;
-	/**
-	 * 修改人
-	 */
+
 	@TableField(fill = FieldFill.INSERT_UPDATE)
+	@ApiModelProperty("修改人")
 	private Long updateUser;
 
 }

@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -13,55 +14,35 @@ import lombok.Data;
  */
 @Data
 public class ShoppingCart implements Serializable {
-	/**
-	 * 主键
-	 */
+	@ApiModelProperty("主键")
 	private Long id;
 
-	/**
-	 * 名称
-	 */
+	@ApiModelProperty("名称")
 	private String name;
 
-	/**
-	 * 图片
-	 */
+	@ApiModelProperty("图片")
 	private String image;
 
-	/**
-	 * 主键
-	 */
+	@ApiModelProperty("主键")
 	private Long userId;
 
-	/**
-	 * 菜品id
-	 */
+	@ApiModelProperty("菜品id")
 	private Long dishId;
 
-	/**
-	 * 套餐id
-	 */
+	@ApiModelProperty("套餐id")
 	private Long setmealId;
 
-	/**
-	 * 口味
-	 */
+	@ApiModelProperty("口味")
 	private String dishFlavor;
 
-	/**
-	 * 数量
-	 */
+	@ApiModelProperty("数量")
 	private Integer number;
 
-	/**
-	 * 金额
-	 */
+	@ApiModelProperty("金额")
 	private BigDecimal amount;
 
-	/**
-	 * 创建时间
-	 */
 	@TableField(fill = FieldFill.INSERT)
+	@ApiModelProperty("创建时间")
 	private Date createTime;
 
 	private static final long serialVersionUID = 1L;

@@ -1,46 +1,46 @@
 package junw.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 /**
  * @author junw
  */
 @Data
-public class Dish implements Serializable {
+@ApiModel("套餐信息")
+public class Setmeal2 implements Serializable {
+	// 这里是对上面的实体类进行了swagger改造
 
 	@ApiModelProperty("主键")
 	private Long id;
 
-	@ApiModelProperty("菜品名称")
-	private String name;
-
 	@ApiModelProperty("菜品分类id")
 	private Long categoryId;
 
-	@ApiModelProperty("菜品价格")
+	@ApiModelProperty("套餐名称")
+	private String name;
+
+	@ApiModelProperty("套餐价格")
 	private BigDecimal price;
 
-	@ApiModelProperty("商品码")
-	private String code;
+	@ApiModelProperty("状态 0:停用 1:启用")
+	private Integer status;
 
-	@ApiModelProperty("图片")
-	private String image;
+	@ApiModelProperty("编码")
+	private String code;
 
 	@ApiModelProperty("描述信息")
 	private String description;
 
-	@ApiModelProperty("0 停售 1 起售")
-	private Integer status;
-
-	@ApiModelProperty("顺序")
-	private Integer sort;
+	@ApiModelProperty("图片")
+	private String image;
 
 	@TableField(fill = FieldFill.INSERT)
 	@ApiModelProperty("创建时间")

@@ -110,6 +110,13 @@
 			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
 			<version>4.0.0-RC1</version>
 		</dependency>
+		<!--这里需要使用swagger技术，实际上是为了生成接口文档-->
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>knife4j-spring-boot-starter</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

@@ -2,6 +2,7 @@ package junw.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,69 +14,52 @@ import java.util.Date;
  */
 @Data
 public class SetmealDish implements Serializable {
-	/**
-	 * 主键
-	 */
+
+	@ApiModelProperty("主键")
 	private Long id;
 
-	/**
-	 * 套餐id
-	 */
+	@ApiModelProperty("套餐id")
 	private String setmealId;
 
-	/**
-	 * 菜品id
-	 */
+	@ApiModelProperty("菜品id")
 	private String dishId;
 
 	/**
 	 * 菜品名称 （冗余字段）
 	 * 根据id就可以直接查询出来name
 	 */
+	@ApiModelProperty("菜品名称 （冗余字段）")
 	private String name;
 
-	/**
-	 * 菜品原价（冗余字段）
-	 */
+	@ApiModelProperty("菜品原价（冗余字段）")
 	private BigDecimal price;
 
-	/**
-	 * 份数
-	 */
+	@ApiModelProperty("份数")
 	private Integer copies;
 
 	/**
-	 * 排序
+	 *
 	 */
+	@ApiModelProperty("排序")
 	private Integer sort;
 
-	/**
-	 * 创建时间
-	 */
 	@TableField(fill = FieldFill.INSERT)
+	@ApiModelProperty("创建时间")
 	private Date createTime;
 
-	/**
-	 * 更新时间
-	 */
 	@TableField(fill = FieldFill.INSERT_UPDATE)
+	@ApiModelProperty("更新时间")
 	private Date updateTime;
 
-	/**
-	 * 创建人
-	 */
 	@TableField(fill = FieldFill.INSERT)
+	@ApiModelProperty("创建人")
 	private Long createUser;
 
-	/**
-	 * 修改人
-	 */
 	@TableField(fill = FieldFill.INSERT_UPDATE)
+	@ApiModelProperty("修改人")
 	private Long updateUser;
 
-	/**
-	 * 是否删除
-	 */
+	@ApiModelProperty("是否删除")
 	private Integer isDeleted;
 
 	private static final long serialVersionUID = 1L;

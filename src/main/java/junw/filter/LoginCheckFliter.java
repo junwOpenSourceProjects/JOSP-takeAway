@@ -52,7 +52,18 @@ public class LoginCheckFliter implements Filter {
 		Long userId = (Long) httpServletRequest.getSession().getAttribute("employeeInfo");
 		ThreadLocalBaseContent.setUserId(userId);// 直接将session中的数据保存到线程中
 		String requestURI = httpServletRequest.getRequestURI();
-		String[] requestUrls = {"/employee/login", "/employee/logout", "/backend/**", "/front/**", "/user/sendMsg", "user/login"};
+		String[] requestUrls = {"/employee/login",
+				"/employee/logout",
+				"/backend/**",
+				// 移动端处理的拦截
+				"/front/**",
+				"/user/sendMsg",
+				"user/login",
+				// 添加swagger以后补充的拦截
+				"/doc.html",
+				"webjars/**",
+				"/swagger-resources",
+				"/v2/api-docs"};
 		// "/user/sendMsg"移动端发送短信
 		// "user/login"移动端用户登录
 
