@@ -1,5 +1,9 @@
 package junw.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.entity.Orders;
 import junw.service.OrdersService;
@@ -21,13 +25,23 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
+@Api(tags = "订单相关接口")
 @RequestMapping("/order")
 public class OrdersController {
 
 	@Autowired
 	private OrdersService ordersService;
 
+	/**
+	 * 提交订单接口
+	 * @param orders 实体类
+	 * @return 提交结果
+	 */
 	@PostMapping("/submit")
+	@ApiOperation("提交订单接口")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "orders", value = "orders实体类", required = false)
+	})
 	public ReturnResult<String> submitOneOrder(@RequestBody Orders orders) {
 		ordersService.submitOneOrder(orders);
 

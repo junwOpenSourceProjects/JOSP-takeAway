@@ -2,6 +2,10 @@ package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.dto.SetmealDto;
 import junw.entity.Category;
@@ -34,6 +38,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @Slf4j
+@Api(tags = "setmeal相关接口")
 @RequestMapping("/setmeal")
 public class SetMealController {
 	@Autowired
@@ -45,7 +50,16 @@ public class SetMealController {
 	@Autowired
 	private CategoryService categoryService;
 
+	/**
+	 * 保存套餐接口
+	 * @param setmealDto 实体类
+	 * @return 提交结果
+	 */
 	@PostMapping
+	@ApiOperation("保存套餐接口")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "setmealDto", value = "setmealDto实体类", required = false)
+	})
 	public ReturnResult<String> saveOne(@RequestBody SetmealDto setmealDto) {
 		log.info("我是saveOne方法");
 		setMealService.saveOneDish(setmealDto);
@@ -53,7 +67,21 @@ public class SetMealController {
 		return ReturnResult.sendSuccess("新增套餐");
 	}
 
+	/**
+	 * 分页
+	 * @param page 分页
+	 * @param pageSize 每页数据
+	 * @param name 查询条件
+	 * @return 分页
+	 */
+
 	@GetMapping("/page")
+	@ApiOperation("分页")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "page", value = "页面", required = true),
+			@ApiImplicitParam(name = "pageSize", value = "每页数据", required = true),
+			@ApiImplicitParam(name = "name", value = "名称", required = false)
+	})
 	public ReturnResult<Page> page(int page, int pageSize, String name) {
 		Page<Setmeal> setmealPage = new Page<>(page, pageSize);
 		Page<SetmealDto> dtoPage = new Page<>();
@@ -91,6 +119,10 @@ public class SetMealController {
 	 * @return 成功失败
 	 */
 	@DeleteMapping
+	@ApiOperation("根据id删除套餐")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "ids", value = "id的list", required = true),
+	})
 	public ReturnResult<String> delete(@RequestParam List<Long> ids) {
 		// 这里的注解不是PathVariable,而是
 		// 首先删除套餐中的数据
@@ -100,8 +132,16 @@ public class SetMealController {
 		return ReturnResult.sendSuccess("删除成功");
 	}
 
-
+	/**
+	 * 获取所有setmeal
+	 * @param setmeal 实体
+	 * @return 获取setmeal的list
+	 */
 	@GetMapping("list")
+	@ApiOperation("获取setmeal的list")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "setmeal", value = "setmeal实体类", required = true),
+	})
 	public ReturnResult<List<Setmeal>> getSetmealList(Setmeal setmeal) {
 		// @RequestBody 不是随便加的
 		// 如果参数是直接跟在请求后面，那么不需要

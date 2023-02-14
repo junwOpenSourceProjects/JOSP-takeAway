@@ -1,6 +1,10 @@
 package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.common.ThreadLocalBaseContent;
 import junw.entity.ShoppingCart;
@@ -27,6 +31,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@Api(tags = "购物车相关接口")
 @RequestMapping("/shoppingCart")
 public class ShoppingCartController {
 	@Autowired
@@ -40,6 +45,10 @@ public class ShoppingCartController {
 	 * @return 返回添加成功
 	 */
 	@PostMapping("/add")
+	@ApiOperation("添加菜品到购物车")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "shoppingCart", value = "shoppingCart实体", required = true)
+	})
 	public ReturnResult<ShoppingCart> addOne(@RequestBody ShoppingCart shoppingCart) {
 		log.info("添加一个到购物车");
 		shoppingCart.setUserId(ThreadLocalBaseContent.getUserId());
@@ -68,7 +77,12 @@ public class ShoppingCartController {
 		return ReturnResult.sendSuccess(scOne);
 	}
 
+	/**
+	 * 展示购物车数据
+	 * @return 购物清单
+	 */
 	@GetMapping("/list")
+	@ApiOperation("展示购物车数据")
 	public ReturnResult<List<ShoppingCart>> showMeShoppingCart() {
 		LambdaQueryWrapper<ShoppingCart> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(ShoppingCart::getUserId, ThreadLocalBaseContent.getUserId());
@@ -78,7 +92,16 @@ public class ShoppingCartController {
 		return ReturnResult.sendSuccess(shoppingCartList);
 	}
 
+	/**
+	 * 清空购物车接口
+	 * @param shoppingCart 购物车
+	 * @return 购物车
+	 */
 	@DeleteMapping
+	@ApiOperation("清空购物车接口")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "shoppingCart", value = "shoppingCart实体", required = true)
+	})
 	public ReturnResult<String> cleanShoppingCart(@RequestBody ShoppingCart shoppingCart) {
 		LambdaQueryWrapper<ShoppingCart> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(ShoppingCart::getUserId, shoppingCart.getUserId());

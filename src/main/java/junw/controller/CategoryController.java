@@ -2,6 +2,10 @@ package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.entity.Category;
 import junw.service.CategoryService;
@@ -28,6 +32,7 @@ import java.util.List;
  */
 @RestController
 @Slf4j
+@Api(tags = "套餐相关接口")
 @RequestMapping("/category")
 public class CategoryController {
 	@Autowired
@@ -40,6 +45,10 @@ public class CategoryController {
 	 * @return 成功失败
 	 */
 	@PostMapping
+	@ApiOperation("我是添加菜单和套餐")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "category", value = "category实体类", required = true)
+	})
 	public ReturnResult<String> saveOneCategory(@RequestBody Category category) {
 		log.info("我是添加方法");
 
@@ -58,6 +67,11 @@ public class CategoryController {
 	 * @return 分页
 	 */
 	@GetMapping("/page")
+	@ApiOperation("分页")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "page", value = "页面", required = true),
+			@ApiImplicitParam(name = "pageSize", value = "每页数据", required = true)
+	})
 	public ReturnResult<Page> page(int page, int pageSize) {
 		Page<Category> page1 = new Page<>(page, pageSize);
 		LambdaQueryWrapper<Category> lambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -73,6 +87,10 @@ public class CategoryController {
 	 * @return 删除结果
 	 */
 	@DeleteMapping
+	@ApiOperation("根据id删除一条数据")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "实体主键", required = true)
+	})
 	public ReturnResult<String> delete(Long id) {
 		log.info("我是删除方法，删除id为" + id);
 		// categoryService.removeById(id);
@@ -87,6 +105,10 @@ public class CategoryController {
 	 * @return 返回更新成功
 	 */
 	@PutMapping
+	@ApiOperation("根据id更新")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "category", value = "category实体类", required = true)
+	})
 	public ReturnResult<String> updateById(Category category) {
 		categoryService.updateById(category);
 		return ReturnResult.sendSuccess("修改分类信息成功");
@@ -99,6 +121,10 @@ public class CategoryController {
 	 * @return 类别list
 	 */
 	@GetMapping("/list")
+	@ApiOperation("根据条件查询分类信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "category", value = "category实体类", required = true)
+	})
 	public ReturnResult<List<Category>> listCategory(Category category) {
 		log.info("修改分类信息" + category);
 		LambdaQueryWrapper<Category> lambdaQueryWrapper = new LambdaQueryWrapper<>();

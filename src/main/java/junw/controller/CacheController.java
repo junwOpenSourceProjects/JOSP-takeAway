@@ -1,5 +1,9 @@
 package junw.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.entity.AddressBook;
 import junw.entity.Category;
@@ -31,6 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
+@Api(tags = "缓存相关接口")
 @RequestMapping("/cache")
 public class CacheController {
 	@Autowired
@@ -58,6 +63,10 @@ public class CacheController {
 	 */
 	@PostMapping
 	@CachePut(value = "categoryCache", key = "#category.id")
+	@ApiOperation("保存一个套餐")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "category", value = "套餐实体类", required = true)
+	})
 	public ReturnResult<String> saveOneCategory(@RequestBody Category category) {
 		if (category != null) {
 			categoryService.save(category);
@@ -84,6 +93,10 @@ public class CacheController {
 	 */
 	@DeleteMapping
 	@CacheEvict(value = "categoryCache", key = "#id")
+	@ApiOperation("根据id删除一条数据")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "对象主键", required = true)
+	})
 	public ReturnResult<String> delete(Long id) {
 		categoryService.removeCategory(id);
 		return ReturnResult.sendSuccess("删除成功");
@@ -102,6 +115,10 @@ public class CacheController {
 	 */
 	@CacheEvict(value = "categoryCache", key = "#p0.id",allEntries = true)
 	@PutMapping
+	@ApiOperation("根据id更新数据")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "category", value = "category实体类", required = true)
+	})
 	public ReturnResult<String> updateById(Category category) {
 		categoryService.updateById(category);
 		return ReturnResult.sendSuccess("修改分类信息成功");
@@ -124,6 +141,10 @@ public class CacheController {
 
 	@Cacheable(value = "addressCache", key = "#id", unless = "#result==null")
 	@GetMapping("/{id}")
+	@ApiOperation("获取一个对象")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "实体主键", required = true)
+	})
 	public ReturnResult<AddressBook> getOne(@PathVariable long id) {
 		AddressBook serviceById = addressBookService.getById(id);
 		if (serviceById != null) {

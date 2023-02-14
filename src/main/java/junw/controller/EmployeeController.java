@@ -2,6 +2,10 @@ package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.entity.Employee;
 import junw.service.EmployeeService;
@@ -28,6 +32,7 @@ import java.util.Date;
  */
 @RestController
 @Slf4j
+@Api(tags = "员工相关接口")
 @RequestMapping("/employee")
 public class EmployeeController {
 	@Autowired
@@ -41,6 +46,11 @@ public class EmployeeController {
 	 * @return 登录结果
 	 */
 	@PostMapping("/login")
+	@ApiOperation("登录接口")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的", required = false),
+			@ApiImplicitParam(name = "employee", value = "employee实体", required = true)
+	})
 	public ReturnResult<Employee> userLogin(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
 		// 我们登录成功以后，需要将用户信息保存到session中
 		// 我们后期寻找用户的信息，直接httpServletRequest调用get即可
@@ -81,6 +91,10 @@ public class EmployeeController {
 	 * @return 返回是否退出成功
 	 */
 	@PostMapping("/logout")
+	@ApiOperation("登出接口")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的", required = true)
+	})
 	public ReturnResult<String> logout(HttpServletRequest httpServletRequest) {
 		// 我们前面登录的时候，使用了session
 		// 这里直接去session中拿到用户数据就可以校验和设置退出功能
@@ -96,6 +110,11 @@ public class EmployeeController {
 	 * @return 返回结果
 	 */
 	@PostMapping
+	@ApiOperation("新增员工")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的", required = false),
+			@ApiImplicitParam(name = "employee", value = "employee实体", required = true)
+	})
 	public ReturnResult<String> saveEmployee(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
 		// 因为前端的数据是json形式的，所以这里必须添加RequestBody才能正常封装
 		log.info("新增员工：" + employee.toString());
@@ -128,8 +147,15 @@ public class EmployeeController {
 	 * @return 分页结果
 	 */
 	@GetMapping("/page")
+	@ApiOperation("分页")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "page", value = "页面", required = true),
+			@ApiImplicitParam(name = "pageSize", value = "每页数据", required = true),
+			@ApiImplicitParam(name = "name", value = "名称", required = false)
+	})
 	public ReturnResult<Page> getPage(int page, int pageSize, String name) {
 		log.info("我是page的数据：{}，我是pageSize的数据：{}，我是姓名{}", page, pageSize, name);
+
 		Page page1 = new Page(page, pageSize);
 		LambdaQueryWrapper<Employee> lambdaQueryWrapper = new LambdaQueryWrapper();
 		// x.eq(Employee::getName, name)
@@ -149,6 +175,11 @@ public class EmployeeController {
 	 * @return 是否修改成功
 	 */
 	@PutMapping()
+	@ApiOperation("更新用户信息")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的", required = false),
+			@ApiImplicitParam(name = "employee", value = "employee实体", required = true)
+	})
 	public ReturnResult<String> updateAccount(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
 		employee.setUpdateUser((Long) httpServletRequest.getSession().getAttribute("employeeInfo"));
 		employee.setUpdateTime(new Date());
@@ -163,6 +194,10 @@ public class EmployeeController {
 	 * @return 返回结果
 	 */
 	@GetMapping("/{id}")
+	@ApiOperation("根据id查询一条数据")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "实体主键", required = true)
+	})
 	public ReturnResult<Employee> getById(@PathVariable long id) {
 		log.info("根据id获取参数");
 		Employee byId = employeeService.getById(id);

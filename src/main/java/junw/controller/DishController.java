@@ -2,6 +2,10 @@ package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.dto.DishDto;
 import junw.entity.Category;
@@ -37,6 +41,7 @@ import java.util.stream.Collectors;
  * @description
  */
 @RestController
+@Api(tags = "dish相关接口")
 @Slf4j
 @RequestMapping("/dish")
 public class DishController {
@@ -59,6 +64,10 @@ public class DishController {
 	 * @return 返回结果
 	 */
 	@PostMapping
+	@ApiOperation("保存一条数据")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "dishDto", value = "dishDto实体类", required = true)
+	})
 	public ReturnResult<String> saveOne(@RequestBody DishDto dishDto) {
 		log.info("我是save方法中提交的数据：" + dishDto);
 		dishService.saveDishWithFlavor(dishDto);
@@ -79,6 +88,12 @@ public class DishController {
 	 * @return 返回分页数据
 	 */
 	@GetMapping("/page")
+	@ApiOperation("分页")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "page", value = "页面", required = true),
+			@ApiImplicitParam(name = "pageSize", value = "每页数据", required = true),
+			@ApiImplicitParam(name = "name", value = "名称", required = false)
+	})
 	public ReturnResult<Page> page(int page, int pageSize, String name) {
 		Page<Dish> pageInfo = new Page<>(page, pageSize);
 		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -125,6 +140,10 @@ public class DishController {
 	 * @return dishDto
 	 */
 	@GetMapping("/{id}")
+	@ApiOperation("根据id查询一条数据")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "实体主键", required = true)
+	})
 	public ReturnResult<DishDto> changOne(@PathVariable Long id) {
 		DishDto dishDtoById = dishService.getDishDtoById(id);
 		// 我们将具体的方法封到service中，然后调用的时候，可以提高复用性
@@ -138,6 +157,10 @@ public class DishController {
 	 * @return 更新结果
 	 */
 	@PutMapping
+	@ApiOperation("根据id更新一条数据")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "dishDto", value = "dishDto实体", required = true)
+	})
 	public ReturnResult<String> updateOne(@RequestBody DishDto dishDto) {
 		// log.info("我是save方法中提交的数据：" + dishDto);
 		dishService.updateDishInfo(dishDto);
@@ -154,6 +177,10 @@ public class DishController {
 	 * @return 实体类list
 	 */
 	@GetMapping("/list")
+	@ApiOperation("查询dish列表")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "dish", value = "dish实体", required = true)
+	})
 	public ReturnResult<List<Dish>> getDishList(Dish dish) {
 		// 每次点击的时候，都会发送一次请求，我们根据发送过来的菜式
 		// 进一步查询菜式底下的套餐都有哪些
@@ -172,6 +199,10 @@ public class DishController {
 	 * @return dishDto的list
 	 */
 	@GetMapping("/list2")
+	@ApiOperation("提取dish列表")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "dish", value = "dish实体", required = true)
+	})
 	public ReturnResult<List<DishDto>> getDishDtoList(Dish dish) {
 		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
@@ -205,6 +236,10 @@ public class DishController {
 	 * @return dishDto的list
 	 */
 	@GetMapping("/list3")
+	@ApiOperation("提取dish列表")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "dish", value = "dish实体", required = true)
+	})
 	public ReturnResult<List<DishDto>> getDishDtoList2(Dish dish) {
 		// 这里上下三个方法是重复的，我只是没有删除而已
 		// 用来看自己的接口迭代过程

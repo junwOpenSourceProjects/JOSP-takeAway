@@ -2,6 +2,10 @@ package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.common.ThreadLocalBaseContent;
 import junw.entity.AddressBook;
@@ -30,12 +34,12 @@ import java.util.List;
  */
 @RestController
 @Slf4j
+@Api(tags = "地址相关接口")
 @RequestMapping("/addressBook")
 public class AddressBookController {
 	@Autowired
 	private DataSource dataSource;
 	// 必须要注入一个数据源对象，否则读写分离无效
-
 
 	@Autowired
 	private AddressBookService addressBookService;
@@ -47,6 +51,10 @@ public class AddressBookController {
 	 * @return 地址
 	 */
 	@PostMapping
+	@ApiOperation("新增套餐接口")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "addressBook", value = "地址实体类", required = true)
+	})
 	public ReturnResult<AddressBook> saveOne(@RequestBody AddressBook addressBook) {
 		addressBook.setUserId(ThreadLocalBaseContent.getUserId());// 获取用户id
 
@@ -63,6 +71,10 @@ public class AddressBookController {
 	 * @return 地址
 	 */
 	@PutMapping("/default")
+	@ApiOperation("设置默认地址接口")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "addressBook", value = "地址实体类", required = true)
+	})
 	public ReturnResult<AddressBook> setDefaultAddress(@RequestBody AddressBook addressBook) {
 		// addressBookService
 		LambdaUpdateWrapper<AddressBook> lambdaUpdateWrapper = new LambdaUpdateWrapper<>();
@@ -82,7 +94,11 @@ public class AddressBookController {
 	 * @param id id
 	 * @return 地址
 	 */
+	@ApiOperation("查询套餐接口")
 	@GetMapping("/{id}")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "数据主键", required = true)
+	})
 	public ReturnResult<AddressBook> getOne(@PathVariable long id) {
 		AddressBook serviceById = addressBookService.getById(id);
 		if (serviceById != null) {
@@ -96,6 +112,7 @@ public class AddressBookController {
 	 *
 	 * @return 地址
 	 */
+	@ApiOperation("获取默认接口")
 	@GetMapping("default")
 	public ReturnResult<AddressBook> getDefault() {
 		LambdaQueryWrapper<AddressBook> lambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -115,6 +132,10 @@ public class AddressBookController {
 	 * @return 地址list
 	 */
 	@GetMapping("/list")
+	@ApiOperation("获取一个地址集合")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "addressBook", value = "地址实体类", required = true)
+	})
 	public ReturnResult<List<AddressBook>> list(AddressBook addressBook) {
 		addressBook.setUserId(ThreadLocalBaseContent.getUserId());
 		log.info("我是用户信息");

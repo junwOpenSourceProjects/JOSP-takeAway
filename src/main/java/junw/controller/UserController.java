@@ -1,6 +1,10 @@
 package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.entity.User;
 import junw.service.UserService;
@@ -29,6 +33,7 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 @Slf4j
+@Api(tags = "用户相关接口")
 @RequestMapping
 public class UserController {
 	@Autowired
@@ -38,7 +43,18 @@ public class UserController {
 	private RedisTemplate redisTemplate;
 	// 调用redis服务，将我们的验证码缓存进去
 
+	/**
+	 * 发送验证码
+	 * @param user 用户信息
+	 * @param httpSession session
+	 * @return 结果
+	 */
 	@PostMapping("/sendMsg")
+	@ApiOperation("发送验证码")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "user", value = "user实体", required = true),
+			@ApiImplicitParam(name = "httpSession", value = "session", required = false)
+	})
 	public ReturnResult<String> sendMsg(@RequestBody User user, HttpSession httpSession) {
 		String userPhone = user.getPhone();
 		if (userPhone != null) {
@@ -58,7 +74,18 @@ public class UserController {
 		return ReturnResult.sendError("发送失败");
 	}
 
+	/**
+	 * 登录接口
+	 * @param map map
+	 * @param httpSession session
+	 * @return 用户实体
+	 */
 	@PostMapping("/login")
+	@ApiOperation("登录接口")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "map", value = "map实体", required = true),
+			@ApiImplicitParam(name = "httpSession", value = "session", required = false)
+	})
 	public ReturnResult<User> login(@RequestBody Map map, HttpSession httpSession) {
 		String phone = map.get("phone").toString();
 		String code = map.get("code").toString();
