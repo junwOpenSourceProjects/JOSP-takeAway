@@ -1,8 +1,6 @@
 
 Q
 !src/test/java/UploadFileTest.java,1\f\1f0d438c8db53dc7209232214449074d94b7b62b
-C
-reggie_takeaway.iml,2\5\25095409c9b8b1e579eaeb4b3dc38dfb96cbd986
 _
 /src/main/java/junw/service/EmployeeService.java,c\b\cbcea84c41461a6d8affb6c2dd2de6125694adb5
 a
@@ -100,8 +98,6 @@ V
 &src/main/java/junw/utils/SMSUtils.java,7\f\7f7268a3e8dadb80768977a28268555b81486e65
 Y
 )src/main/java/junw/ReggieApplication.java,2\0\208e6ad06b6a5d99805233652e4750cde72c62b5
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 e
 5src/main/java/junw/config/SpringWebConfiguration.java,1\c\1cdf7b57a1bbd24c22003d847af85c31600bebb1
 _
@@ -134,12 +130,6 @@ Z
 +src/main/java/junw/entity/ShoppingCart.java,e\9\e923195a3e2abcfe5ab178639e7cd5de89af4b47
 S
 #src/main/java/junw/entity/User.java,8\c\8c547811754740fdfd4887c0964d9f445cd3156f
-h
-8src/main/java/junw/controller/OrderDetailController.java,f\e\fe83f2b07ccb04b03308d2961e133747bab066ed
-Z
-*src/main/java/junw/controller/DogDemo.java,c\8\c8d983ba0cebfd90ddaac48009a1efbdd5c53ef6
-f
-6src/main/java/junw/controller/EmployeeController2.java,1\6\16e73eb6be107d2713557db567f44c97fec5fef8
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 h
@@ -150,15 +140,27 @@ e
 5src/main/java/junw/controller/CategoryController.java,0\7\071a10ba0fca6448793a74ce9e1118d5ec90062e
 a
 1src/main/java/junw/controller/DishController.java,3\c\3c24975b0269ca47d9d25bc01002fe19a09ad5f9
+Z
+*src/main/java/junw/controller/DogDemo.java,c\8\c8d983ba0cebfd90ddaac48009a1efbdd5c53ef6
 e
 5src/main/java/junw/controller/EmployeeController.java,4\5\4554cf4fbb32da2bc0b497f75ed4e6a5e9df0f4b
+f
+6src/main/java/junw/controller/EmployeeController2.java,1\6\16e73eb6be107d2713557db567f44c97fec5fef8
 a
 1src/main/java/junw/controller/FileController.java,7\6\761de2e30833442668a48c5d9dfc8e195fa61d69
 c
 3src/main/java/junw/controller/OrdersController.java,0\1\01341d40e21c2464cf3621e5953bd5a5a51ea3f4
+h
+8src/main/java/junw/controller/OrderDetailController.java,f\e\fe83f2b07ccb04b03308d2961e133747bab066ed
 d
 4src/main/java/junw/controller/SetMealController.java,3\f\3fcb5e0d5a6dc14186e45407d98f2c4411cc8361
 i
 9src/main/java/junw/controller/ShoppingCartController.java,2\9\296478929c5ec34b57175c358c05a63b1c6c86e2
 a
 1src/main/java/junw/controller/UserController.java,6\9\69a1c9d2c077926139b7ed7d13a8c905ac0ca13d
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+C
+reggie_takeaway.iml,2\5\25095409c9b8b1e579eaeb4b3dc38dfb96cbd986
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d

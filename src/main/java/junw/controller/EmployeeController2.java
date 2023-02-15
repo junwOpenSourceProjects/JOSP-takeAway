@@ -2,6 +2,7 @@ package junw.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
 import junw.common.ReturnResult;
 import junw.entity.Employee;
 import junw.service.EmployeeService;
@@ -25,6 +26,7 @@ import java.util.Date;
 @RestController
 @Slf4j
 @RequestMapping("/employee2")
+@Api(tags = "员工相关接口")
 public class EmployeeController2 {
 	@Autowired
 	private EmployeeService employeeService;
