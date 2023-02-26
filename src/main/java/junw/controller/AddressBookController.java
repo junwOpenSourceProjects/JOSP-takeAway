@@ -37,8 +37,8 @@ import java.util.List;
 @Api(tags = "地址相关接口")
 @RequestMapping("/addressBook")
 public class AddressBookController {
-	@Autowired
-	private DataSource dataSource;
+	// @Autowired
+	// private DataSource dataSource;
 	// 必须要注入一个数据源对象，否则读写分离无效
 
 	@Autowired
