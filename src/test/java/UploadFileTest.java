@@ -19,4 +19,8 @@ public class UploadFileTest {
 		String suffix = demo.substring(demo.lastIndexOf("."));
 		log.info("我是后缀：" + suffix);
 	}
+    @Test
+    public void show(){
+        log.info("123");
+    }
 }
