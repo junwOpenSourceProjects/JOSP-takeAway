@@ -71,8 +71,6 @@ Y
 )src/main/java/junw/ReggieApplication.java,2\0\208e6ad06b6a5d99805233652e4750cde72c62b5
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-e
-5src/main/java/junw/controller/EmployeeController.java,4\5\4554cf4fbb32da2bc0b497f75ed4e6a5e9df0f4b
 [
 +src/main/java/junw/common/ReturnResult.java,4\2\42460f445a0630ff622128c8042be8ebc8215a28
 X
@@ -87,8 +85,6 @@ W
 'src/main/java/junw/entity/Employee.java,8\2\822cec34bfa369d3586e294af6e3f5f6e1264849
 b
 2src/main/java/junw/common/JacksonObjectMapper.java,9\4\94ee2097a0859454a2c052005ede3df4b4a4b6b9
-f
-6src/main/java/junw/controller/EmployeeController2.java,1\6\16e73eb6be107d2713557db567f44c97fec5fef8
 b
 2src/main/java/junw/common/MyMetaObjectHandler.java,6\2\627766d8bbf1e24b051edd08665d84b8dee130af
 e
@@ -131,8 +127,6 @@ V
 &src/main/java/junw/utils/SMSUtils.java,7\f\7f7268a3e8dadb80768977a28268555b81486e65
 _
 /src/main/java/junw/utils/ValidateCodeUtils.java,0\9\09b3125e8b760d0a29c8196e3a878ccc55763a69
-a
-1src/main/java/junw/controller/UserController.java,6\9\69a1c9d2c077926139b7ed7d13a8c905ac0ca13d
 _
 /src/main/java/junw/filter/LoginCheckFilter.java,8\3\838439551ec6d4b49f3bad6cf1fd6bc969ba4b77
 a
@@ -143,3 +137,16 @@ c
 3src/main/java/junw/service/ShoppingCartService.java,5\7\57cb3a1078994eb46b21b347ff264d1070bfed78
 l
 <src/main/java/junw/service/impl/ShoppingCartServiceImpl.java,4\5\456e80db0b6ce4f528108e6c80486a74c2680f98
+`
+0src/main/java/junw/mapper/AddressBookMapper.java,2\5\252aafbbe10dcebb94400ef5dc57ea57dcf86cde
+N
+src/test/java/Jedis2Redis.java,e\c\ec59348e00ec11e38a2f8ab1f5793bbaca847362
+Z
+*src/test/java/SpringBootDataRedisTest.java,d\6\d6752b4c0590d67d463028bdebf7e24d327468a4
+Q
+!src/test/java/UploadFileTest.java,1\f\1f0d438c8db53dc7209232214449074d94b7b62b
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+g
+7src/main/java/junw/config/MybatisPlusConfiguration.java,c\e\ce4a1e0ccc47b4378781553e162d4b7df15faa91

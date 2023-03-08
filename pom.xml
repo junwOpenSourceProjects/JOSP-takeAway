@@ -11,7 +11,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>junw</groupId>
-	<artifactId>reggie_takeaway</artifactId>
+	<artifactId>JOSP-takeAway</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<properties>
 		<!--<maven.compiler.source>19</maven.compiler.source>-->
@@ -105,11 +105,12 @@
 		</dependency>
 		<!--下面是shard的依赖-->
 		<!--可以理解为增强版的jdbc-->
-		<dependency>
-			<groupId>org.apache.shardingsphere</groupId>
-			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-			<version>4.0.0-RC1</version>
-		</dependency>
+		<!--添加以后就会导致项目报错，无法运行-->
+		<!--<dependency>-->
+		<!--	<groupId>org.apache.shardingsphere</groupId>-->
+		<!--	<artifactId>sharding-jdbc-spring-boot-starter</artifactId>-->
+		<!--	<version>4.0.0-RC1</version>-->
+		<!--</dependency>-->
 		<!--这里需要使用swagger技术，实际上是为了生成接口文档-->
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
