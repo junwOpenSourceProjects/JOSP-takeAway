@@ -1,6 +1,4 @@
 
-Q
-!src/test/java/UploadFileTest.java,1\f\1f0d438c8db53dc7209232214449074d94b7b62b
 a
 1src/main/java/junw/service/DishFlavorService.java,6\c\6c739c4fd8c56c97027e088a65e097dd4967ed9d
 j
@@ -9,8 +7,6 @@ j
 ,src/main/java/junw/mapper/SetMealMapper.java,5\0\50b6256acadf7b8d2b96b3a39cbf0e1764e25001
 _
 /src/main/java/junw/mapper/DishFlavorMapper.java,4\9\49ee04c89b9c6098306306ebc035cc78f98b2816
-g
-7src/main/java/junw/config/MybatisPlusConfiguration.java,c\e\ce4a1e0ccc47b4378781553e162d4b7df15faa91
 `
 0src/main/java/junw/mapper/SetmealDishMapper.java,7\5\75a7d2d8716d654b4df64cf5f51bef255a85d05d
 k
@@ -46,8 +42,6 @@ f
 6src/main/java/junw/service/impl/OrdersServiceImpl.java,e\1\e15996ce966d7d8b3ceedd1c027a140b92b0f2f8
 a
 1src/main/java/junw/config/RedisConfiguration.java,b\6\b677e602b85d58fb18ec7a15736e0387b520401e
-Z
-*src/test/java/SpringBootDataRedisTest.java,d\6\d6752b4c0590d67d463028bdebf7e24d327468a4
 e
 5src/main/java/junw/config/SpringWebConfiguration.java,1\c\1cdf7b57a1bbd24c22003d847af85c31600bebb1
 Y
@@ -74,14 +68,8 @@ C
 reggie_takeaway.iml,2\5\25095409c9b8b1e579eaeb4b3dc38dfb96cbd986
 Z
 *src/main/java/junw/entity/AddressBook.java,1\c\1c716a993f1c3485041d842073f8f9266a003aff
-N
-src/test/java/Jedis2Redis.java,e\c\ec59348e00ec11e38a2f8ab1f5793bbaca847362
 b
 2src/main/java/junw/controller/CacheController.java,5\3\5322e54eebafd9dde0b3886557639017c688ca13
-k
-;src/main/java/junw/service/impl/AddressBookServiceImpl.java,f\4\f4487f1439d5c7f043775e3b3b4ac67f16cdb4d7
-`
-0src/main/java/junw/mapper/AddressBookMapper.java,2\5\252aafbbe10dcebb94400ef5dc57ea57dcf86cde
 Y
 )src/main/java/junw/ReggieApplication.java,2\0\208e6ad06b6a5d99805233652e4750cde72c62b5
 9
@@ -92,8 +80,6 @@ e
 +src/main/java/junw/common/ReturnResult.java,4\2\42460f445a0630ff622128c8042be8ebc8215a28
 X
 (src/main/java/junw/entity/Employee2.java,0\6\069a32ad5c52c0f8bda63d363a5ae898d3e118a8
-h
-8src/main/java/junw/controller/AddressBookController.java,6\3\633c4280c9495cbb72aac11a4a229a199c6af17a
 _
 /src/main/java/junw/service/EmployeeService.java,c\b\cbcea84c41461a6d8affb6c2dd2de6125694adb5
 h
