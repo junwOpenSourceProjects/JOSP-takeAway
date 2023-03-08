@@ -33,9 +33,6 @@ b
 2src/main/java/junw/service/OrderDetailService.java,5\5\5532352cecbcb2a26cc66f12e93031381f20a94d
 k
 ;src/main/java/junw/service/impl/OrderDetailServiceImpl.java,c\5\c582fcafdd83d42a56c1d27b087b1a04f2cbfd35
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 ]
 -src/main/java/junw/service/OrdersService.java,a\8\a88c3e4d66a45b817e43d8029c0c3157ae75164d
 f
