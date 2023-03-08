@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import junw.common.ReturnResult;
 import junw.entity.User;
 import junw.service.UserService;
-import junw.utils.SMSUtils;
 import junw.utils.ValidateCodeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +37,14 @@ import java.util.concurrent.TimeUnit;
 public class UserController {
 	@Autowired
 	private UserService userService;
-
 	@Autowired
 	private RedisTemplate redisTemplate;
 	// 调用redis服务，将我们的验证码缓存进去
 
 	/**
 	 * 发送验证码
-	 * @param user 用户信息
+	 *
+	 * @param user        用户信息
 	 * @param httpSession session
 	 * @return 结果
 	 */
@@ -53,7 +52,7 @@ public class UserController {
 	@ApiOperation("发送验证码")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "user", value = "user实体", required = true),
-			@ApiImplicitParam(name = "httpSession", value = "session", required = false)
+			@ApiImplicitParam(name = "httpSession", value = "session")
 	})
 	public ReturnResult<String> sendMsg(@RequestBody User user, HttpSession httpSession) {
 		String userPhone = user.getPhone();
@@ -68,9 +67,10 @@ public class UserController {
 			// 短信的模板代码
 			// 用户手机号，随机出来的验证码
 			// httpSession.setAttribute(userPhone, validateCode);
+			// =================================================================
 			// 项目优化：将验证码缓存到redis中
 			// 因为我们的验证码保存到缓存中，所以也就不需要上面的session来保存
-			// redisTemplate.opsForValue().set(userPhone, validateCode, 5, TimeUnit.MINUTES);
+			redisTemplate.opsForValue().set(userPhone, validateCode, 5, TimeUnit.MINUTES);
 			return ReturnResult.sendSuccess("发送成功");
 		}
 		return ReturnResult.sendError("发送失败");
@@ -78,7 +78,8 @@ public class UserController {
 
 	/**
 	 * 登录接口
-	 * @param map map
+	 *
+	 * @param map         map
 	 * @param httpSession session
 	 * @return 用户实体
 	 */
@@ -86,20 +87,22 @@ public class UserController {
 	@ApiOperation("登录接口")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "map", value = "map实体", required = true),
-			@ApiImplicitParam(name = "httpSession", value = "session", required = false)
+			@ApiImplicitParam(name = "httpSession", value = "session")
 	})
 	public ReturnResult<User> login(@RequestBody Map map, HttpSession httpSession) {
 		String phone = map.get("phone").toString();
 		String code = map.get("code").toString();
 		// Object attribute = httpSession.getAttribute(phone);// 获取缓存的验证码
 		// 如果已经登录成功，那就把缓存中的验证码给删除
+		// =======================================================================
 		// 和上面同理，直接从缓存中读取即可
 		Object attribute = redisTemplate.opsForValue().get(phone);// 从redis中获取的验证码
+		// =======================================================================
 		if (attribute != null && attribute.equals(code)) {
 			LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 			lambdaQueryWrapper.eq(User::getPhone, phone);
 			User one = userService.getOne(lambdaQueryWrapper);// 需要完成判空操作
-			if (one == null) {
+			if (one == null) {// 如果没有该用户，那么就注册一个
 				one = new User();
 				one.setPhone(phone);
 				one.setStatus(1);
@@ -107,6 +110,7 @@ public class UserController {
 			}
 			// 用户登录成功以后，将验证码删除
 			redisTemplate.delete(phone);// 将验证码删除
+			// =======================================================================
 			return ReturnResult.sendSuccess(one);
 		}
 		return ReturnResult.sendError("发送失败");

@@ -40,7 +40,7 @@ public class OrdersController {
 	@PostMapping("/submit")
 	@ApiOperation("提交订单接口")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "orders", value = "orders实体类", required = false)
+			@ApiImplicitParam(name = "orders", value = "orders实体类")
 	})
 	public ReturnResult<String> submitOneOrder(@RequestBody Orders orders) {
 		ordersService.submitOneOrder(orders);

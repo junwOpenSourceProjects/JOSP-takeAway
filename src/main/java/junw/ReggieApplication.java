@@ -26,7 +26,6 @@ public class ReggieApplication {
 	// 添加了ServletComponentScan注解以后，我们才能扫描到自己的webfilter注解
 	// EnableCaching在启动类中添加，配置缓存
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(ReggieApplication.class, args);
 		log.info("spring已经启动了");

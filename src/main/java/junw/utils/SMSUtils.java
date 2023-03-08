@@ -12,7 +12,6 @@ import com.aliyuncs.profile.DefaultProfile;
  * @author junw
  */
 public class SMSUtils {
-
 	/**
 	 * 发送短信
 	 * @param signName 签名

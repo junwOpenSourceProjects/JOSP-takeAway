@@ -2,12 +2,13 @@ server:
   port: 8080
 spring:
   application:
-    name: reggie_takeaway
+    name: JOSP-takeAway
   # 可以手动指定，不指定就是上面包名的默认名称
   redis:
     host: localhost
     port: 6379
     database: 0 #配置了16个数据库，这里使用的是0号数据库
+  #    password: # 设置默认密码
   cache:
     jedis:
       # redis连接池配置

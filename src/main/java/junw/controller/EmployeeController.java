@@ -48,7 +48,7 @@ public class EmployeeController {
 	@PostMapping("/login")
 	@ApiOperation("登录接口")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的", required = false),
+			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的"),
 			@ApiImplicitParam(name = "employee", value = "employee实体", required = true)
 	})
 	public ReturnResult<Employee> userLogin(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
@@ -112,7 +112,7 @@ public class EmployeeController {
 	@PostMapping
 	@ApiOperation("新增员工")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的", required = false),
+			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的"),
 			@ApiImplicitParam(name = "employee", value = "employee实体", required = true)
 	})
 	public ReturnResult<String> saveEmployee(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
@@ -151,7 +151,7 @@ public class EmployeeController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "page", value = "页面", required = true),
 			@ApiImplicitParam(name = "pageSize", value = "每页数据", required = true),
-			@ApiImplicitParam(name = "name", value = "名称", required = false)
+			@ApiImplicitParam(name = "name", value = "名称")
 	})
 	public ReturnResult<Page> getPage(int page, int pageSize, String name) {
 		log.info("我是page的数据：{}，我是pageSize的数据：{}，我是姓名{}", page, pageSize, name);
@@ -177,7 +177,7 @@ public class EmployeeController {
 	@PutMapping()
 	@ApiOperation("更新用户信息")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的", required = false),
+			@ApiImplicitParam(name = "httpServletRequest", value = "拿信息的"),
 			@ApiImplicitParam(name = "employee", value = "employee实体", required = true)
 	})
 	public ReturnResult<String> updateAccount(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {

@@ -58,7 +58,7 @@ public class SetMealController {
 	@PostMapping
 	@ApiOperation("保存套餐接口")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "setmealDto", value = "setmealDto实体类", required = false)
+			@ApiImplicitParam(name = "setmealDto", value = "setmealDto实体类")
 	})
 	public ReturnResult<String> saveOne(@RequestBody SetmealDto setmealDto) {
 		log.info("我是saveOne方法");

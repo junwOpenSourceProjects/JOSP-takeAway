@@ -92,7 +92,7 @@ public class DishController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "page", value = "页面", required = true),
 			@ApiImplicitParam(name = "pageSize", value = "每页数据", required = true),
-			@ApiImplicitParam(name = "name", value = "名称", required = false)
+			@ApiImplicitParam(name = "name", value = "名称")
 	})
 	public ReturnResult<Page> page(int page, int pageSize, String name) {
 		Page<Dish> pageInfo = new Page<>(page, pageSize);
@@ -170,63 +170,63 @@ public class DishController {
 		return ReturnResult.sendSuccess("更新成功");
 	}
 
-	/**
-	 * 查询dish列表
-	 *
-	 * @param dish 实体类
-	 * @return 实体类list
-	 */
-	@GetMapping("/list")
-	@ApiOperation("查询dish列表")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "dish", value = "dish实体", required = true)
-	})
-	public ReturnResult<List<Dish>> getDishList(Dish dish) {
-		// 每次点击的时候，都会发送一次请求，我们根据发送过来的菜式
-		// 进一步查询菜式底下的套餐都有哪些
-		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-		lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
-		lambdaQueryWrapper.eq(Dish::getStatus, 1);
-		lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
-		List<Dish> dishList = dishService.list(lambdaQueryWrapper);
-		return ReturnResult.sendSuccess(dishList);
-	}
-
-	/**
-	 * 提取dish列表
-	 *
-	 * @param dish 实体
-	 * @return dishDto的list
-	 */
-	@GetMapping("/list2")
-	@ApiOperation("提取dish列表")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "dish", value = "dish实体", required = true)
-	})
-	public ReturnResult<List<DishDto>> getDishDtoList(Dish dish) {
-		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-		lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
-		lambdaQueryWrapper.eq(Dish::getStatus, 1);
-		lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
-		List<Dish> dishList = dishService.list(lambdaQueryWrapper);
-		List<DishDto> dishDtoList = dishList.stream().map((item) -> {
-			DishDto dishDto = new DishDto();
-			BeanUtils.copyProperties(item, dishDto);
-			Long categoryId = item.getCategoryId();
-			Category byId = categoryService.getById(categoryId);
-			if (byId != null) {
-				String byIdName = byId.getName();
-				dishDto.setName(byIdName);
-			}
-			Long dishId = item.getId();
-			LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
-			lambdaQueryWrapper1.eq(DishFlavor::getId, dishId);
-			List<DishFlavor> dishFlavors = dishFlavorService.list(lambdaQueryWrapper1);
-			dishDto.setFlavors(dishFlavors);
-			return dishDto;
-		}).collect(Collectors.toList());
-		return ReturnResult.sendSuccess(dishDtoList);
-	}
+	// /**
+	//  * 查询dish列表
+	//  *
+	//  * @param dish 实体类
+	//  * @return 实体类list
+	//  */
+	// @GetMapping("/list")
+	// @ApiOperation("查询dish列表")
+	// @ApiImplicitParams({
+	// 		@ApiImplicitParam(name = "dish", value = "dish实体", required = true)
+	// })
+	// public ReturnResult<List<Dish>> getDishList(Dish dish) {
+	// 	// 每次点击的时候，都会发送一次请求，我们根据发送过来的菜式
+	// 	// 进一步查询菜式底下的套餐都有哪些
+	// 	LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+	// 	lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
+	// 	lambdaQueryWrapper.eq(Dish::getStatus, 1);
+	// 	lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+	// 	List<Dish> dishList = dishService.list(lambdaQueryWrapper);
+	// 	return ReturnResult.sendSuccess(dishList);
+	// }
+	//
+	// /**
+	//  * 提取dish列表
+	//  *
+	//  * @param dish 实体
+	//  * @return dishDto的list
+	//  */
+	// @GetMapping("/list2")
+	// @ApiOperation("提取dish列表")
+	// @ApiImplicitParams({
+	// 		@ApiImplicitParam(name = "dish", value = "dish实体", required = true)
+	// })
+	// public ReturnResult<List<DishDto>> getDishDtoList(Dish dish) {
+	// 	LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+	// 	lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
+	// 	lambdaQueryWrapper.eq(Dish::getStatus, 1);
+	// 	lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+	// 	List<Dish> dishList = dishService.list(lambdaQueryWrapper);
+	// 	List<DishDto> dishDtoList = dishList.stream().map((item) -> {
+	// 		DishDto dishDto = new DishDto();
+	// 		BeanUtils.copyProperties(item, dishDto);
+	// 		Long categoryId = item.getCategoryId();
+	// 		Category byId = categoryService.getById(categoryId);
+	// 		if (byId != null) {
+	// 			String byIdName = byId.getName();
+	// 			dishDto.setName(byIdName);
+	// 		}
+	// 		Long dishId = item.getId();
+	// 		LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
+	// 		lambdaQueryWrapper1.eq(DishFlavor::getId, dishId);
+	// 		List<DishFlavor> dishFlavors = dishFlavorService.list(lambdaQueryWrapper1);
+	// 		dishDto.setFlavors(dishFlavors);
+	// 		return dishDto;
+	// 	}).collect(Collectors.toList());
+	// 	return ReturnResult.sendSuccess(dishDtoList);
+	// }
 
 
 	/**
@@ -235,7 +235,7 @@ public class DishController {
 	 * @param dish 实体
 	 * @return dishDto的list
 	 */
-	@GetMapping("/list3")
+	@GetMapping("/list")
 	@ApiOperation("提取dish列表")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "dish", value = "dish实体", required = true)
@@ -243,7 +243,7 @@ public class DishController {
 	public ReturnResult<List<DishDto>> getDishDtoList2(Dish dish) {
 		// 这里上下三个方法是重复的，我只是没有删除而已
 		// 用来看自己的接口迭代过程
-
+		// =======================================================================
 		// 需要说明一下：
 		// 如果多个用户同时使用系统，查询次数提高，数据库压力会非常大
 		// 这里就可以将我们查询到的list载入缓存中，避免重复查询
@@ -256,32 +256,33 @@ public class DishController {
 			return ReturnResult.sendSuccess(dishDtoList);
 			// 如果缓存中有数据，直接返回即可
 		}
-		// 缓存没有数据，就完成一遍查询
+		// =======================================================================
 
+		// 缓存没有数据，就完成一遍查询
 		LambdaQueryWrapper<Dish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
-		lambdaQueryWrapper.eq(Dish::getStatus, 1);
-		lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
-		List<Dish> dishList = dishService.list(lambdaQueryWrapper);
-		dishDtoList = dishList.stream().map((item) -> {
+		lambdaQueryWrapper.eq(Dish::getStatus, 1);// 查询可用数据
+		lambdaQueryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);// 按照分类和更新时间排序
+		List<Dish> dishList = dishService.list(lambdaQueryWrapper);// 获取dish的list
+		dishDtoList = dishList.stream().map(item -> {
 			DishDto dishDto = new DishDto();
-			BeanUtils.copyProperties(item, dishDto);
-			Long categoryId = item.getCategoryId();
-			Category byId = categoryService.getById(categoryId);
-			if (byId != null) {
+			BeanUtils.copyProperties(item, dishDto);// 复制属性到dto中
+			Long categoryId = item.getCategoryId();// 获取套餐的id
+			Category byId = categoryService.getById(categoryId);// 查询套餐
+			if (byId != null) {// 如果结果不为空，设置进去
 				String byIdName = byId.getName();
 				dishDto.setName(byIdName);
 			}
-			Long dishId = item.getId();
+			Long dishId = item.getId();// 拿到dish的id
 			LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
-			lambdaQueryWrapper1.eq(DishFlavor::getId, dishId);
+			lambdaQueryWrapper1.eq(DishFlavor::getId, dishId);// 根据id去查询口味表
 			List<DishFlavor> dishFlavors = dishFlavorService.list(lambdaQueryWrapper1);
-			dishDto.setFlavors(dishFlavors);
+			dishDto.setFlavors(dishFlavors);// 保存到口味中
 			return dishDto;
 		}).collect(Collectors.toList());
-		redisTemplate.opsForValue().set(redis_keys, dishDtoList, 60, TimeUnit.MINUTES);
-		// 如果没有对应的数据，就将缓存结果保存为key-value
 
+		redisTemplate.opsForValue().set(redis_keys, dishDtoList, 60, TimeUnit.MINUTES);// 保存到redis中
+		// 如果没有对应的数据，就将缓存结果保存为key-value
 		return ReturnResult.sendSuccess(dishDtoList);
 	}
 }
