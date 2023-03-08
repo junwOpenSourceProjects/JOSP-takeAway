@@ -29,6 +29,13 @@ public class ReturnResult<T> {
 	private T data;
 	private Map map = new HashMap();
 
+	/**
+	 * 请求成功
+	 *
+	 * @param object 对象
+	 * @param <T>    成功消息/实体类
+	 * @return 返回结果
+	 */
 	public static <T> ReturnResult<T> sendSuccess(T object) {
 		ReturnResult<T> tReturnResult = new ReturnResult<>();
 		tReturnResult.setData(object);
@@ -36,6 +43,13 @@ public class ReturnResult<T> {
 		return tReturnResult;
 	}
 
+	/**
+	 * 请求失败
+	 *
+	 * @param returnMsg 失败消息
+	 * @param <T>       失败消息/实体类
+	 * @return 返回结果
+	 */
 	public static <T> ReturnResult<T> sendError(String returnMsg) {
 		ReturnResult<T> tReturnResult = new ReturnResult<>();
 		tReturnResult.setCode(0);
@@ -43,6 +57,13 @@ public class ReturnResult<T> {
 		return tReturnResult;
 	}
 
+	/**
+	 * 返回新增
+	 *
+	 * @param key   字符串
+	 * @param value 对象
+	 * @return 任意类型
+	 */
 	public ReturnResult<T> sendAdd(String key, Object value) {
 		this.map.put(key, value);
 		return this;

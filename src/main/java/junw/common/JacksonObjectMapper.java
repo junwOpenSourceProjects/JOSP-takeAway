@@ -21,7 +21,9 @@ import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKN
 
 /**
  * 对象映射器:基于jackson将Java对象转为json，或者将json转为Java对象
+ * <p>
  * 将JSON解析为Java对象的过程称为 [从JSON反序列化Java对象]
+ * <p>
  * 从Java对象生成JSON的过程称为 [序列化Java对象到JSON]
  *
  * @author junw
@@ -33,9 +35,9 @@ public class JacksonObjectMapper extends ObjectMapper {
 	// ObjectMapper将java对象转化为json数据
 	// 同理，也可以将json对象转换为Java数据
 
-	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
-	public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-	public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
+	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";// 设置时间格式
+	public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";// 详细时间格式
+	public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";// 当天24小时格式
 
 	public JacksonObjectMapper() {
 		super();

@@ -67,5 +67,4 @@ public class Employee2 implements Serializable {
 	@TableField(fill = FieldFill.INSERT_UPDATE)
 	@ApiModelProperty("修改人")
 	private Long updateUser;
-
 }

@@ -25,10 +25,10 @@ import java.io.IOException;
  * @Date 2023-01-12-45  星期四
  * @description
  */
-@WebFilter(filterName = "LoginCheckFliter", urlPatterns = "/*")
+@WebFilter(filterName = "LoginCheckFilter", urlPatterns = "/*")
 @Slf4j
-public class LoginCheckFliter implements Filter {
-	public static final AntPathMatcher ANT_PATH_MATCHER = new AntPathMatcher();
+public class LoginCheckFilter implements Filter {
+	public static final AntPathMatcher ANT_PATH_MATCHER = new AntPathMatcher();// 设置一个路径匹配
 	// 过滤器，用来拦截登录功能
 	// urlPatterns表示拦截的路径，这里设置默认拦截所有路径
 	// 拦截javax的servlet
@@ -43,15 +43,16 @@ public class LoginCheckFliter implements Filter {
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
-		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-		HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;// 获取请求数据
+		HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;// 获取响应数据
 
 
-		long threadId = Thread.currentThread().getId();
+		long threadId = Thread.currentThread().getId();// 每次操作都是单线程的，直接获取线程id即可区分
 		log.info("我的线程id：" + threadId);
-		Long userId = (Long) httpServletRequest.getSession().getAttribute("employeeInfo");
+		Long userId = (Long) httpServletRequest.getSession().getAttribute("employeeInfo");// 获取登录的信息
 		ThreadLocalBaseContent.setUserId(userId);// 直接将session中的数据保存到线程中
-		String requestURI = httpServletRequest.getRequestURI();
+		String requestURI = httpServletRequest.getRequestURI();// 获取当前请求路径
+		// 新建一个路径数组，判断请求是否存在于数组中
 		String[] requestUrls = {"/employee/login",
 				"/employee/logout",
 				"/backend/**",
@@ -72,7 +73,7 @@ public class LoginCheckFliter implements Filter {
 		// {}相当于占位符，直接跟上参数，就可以默认带上后面的变量
 
 		// 判断是否需要处理
-		boolean checkLogin = checkLogin(requestUrls, requestURI);
+		boolean checkLogin = checkLogin(requestUrls, requestURI);// 遍历判断是否存在于上面的数组中
 		// 如果不需要处理，就直接返回结果
 		if (checkLogin) {
 			filterChain.doFilter(httpServletRequest, httpServletResponse);
@@ -96,8 +97,6 @@ public class LoginCheckFliter implements Filter {
 
 		httpServletResponse.getWriter().write(JSON.toJSONString(ReturnResult.sendError("NOTLOGIN")));
 		// 这里做的其实是，将我们的ReturnResult对象转换为json格式，然后将其写回到前端的消息体中
-		return;
-
 	}
 
 	/**
@@ -107,7 +106,7 @@ public class LoginCheckFliter implements Filter {
 	 * @param url  请求链接
 	 * @return 布尔
 	 */
-	public boolean checkLogin(String[] urls, String requestURI) {
+	public boolean checkLogin(String[] urls, String requestURI) {// 获取请求的URI，遍历判断是否存在于数组中
 		for (String demoUrl : urls) {
 			boolean match = ANT_PATH_MATCHER.match(demoUrl, requestURI);
 			log.info("我是LoginCheckFliter请求链接：" + demoUrl);

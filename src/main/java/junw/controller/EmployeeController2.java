@@ -56,7 +56,7 @@ public class EmployeeController2 {
 			return ReturnResult.sendError("员工账号停用");
 		}
 		log.info("登录成功");
-		httpServletRequest.getSession().setAttribute("employeeInfo", serviceOne.getId());
+		httpServletRequest.getSession().setAttribute("employeeInfo", serviceOne.getId());// 保存信息
 
 		return ReturnResult.sendSuccess(serviceOne);
 	}
@@ -105,13 +105,15 @@ public class EmployeeController2 {
 	 */
 	@GetMapping("/page")
 	public ReturnResult<Page> getPage(int page, int pageSize, String name) {
+		// 这里的name，就是搜索框中输入的字符
 		log.info("我是page的数据：{}，我是pageSize的数据：{}，我是姓名{}", page, pageSize, name);
+
 		Page page1 = new Page(page, pageSize);
-		LambdaQueryWrapper<Employee> lambdaQueryWrapper = new LambdaQueryWrapper();
+		LambdaQueryWrapper<Employee> lambdaQueryWrapper = new LambdaQueryWrapper();// lambda表达式
 		if (name != null) {
 			lambdaQueryWrapper.like(Employee::getName, name);
 		}
-		lambdaQueryWrapper.orderByDesc(Employee::getUpdateTime);
+		lambdaQueryWrapper.orderByDesc(Employee::getUpdateTime);// 按照更新时间排序
 
 		employeeService.page(page1, lambdaQueryWrapper);// 分页查询
 		return ReturnResult.sendSuccess(page1);
@@ -125,9 +127,9 @@ public class EmployeeController2 {
 	 */
 	@PutMapping()
 	public ReturnResult<String> updateAccount(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
-		employee.setUpdateUser((Long) httpServletRequest.getSession().getAttribute("employeeInfo"));
-		employee.setUpdateTime(new Date());
-		employeeService.updateById(employee);
+		employee.setUpdateUser((Long) httpServletRequest.getSession().getAttribute("employeeInfo"));// 获取登录信息
+		employee.setUpdateTime(new Date());// 设置更新时间
+		employeeService.updateById(employee);// 根据id主键更新
 		return ReturnResult.sendSuccess("修改成功");
 	}
 
@@ -143,7 +145,7 @@ public class EmployeeController2 {
 		Employee byId = employeeService.getById(id);
 
 		if (byId != null) {
-			return ReturnResult.sendSuccess(byId);
+			return ReturnResult.sendSuccess(byId);// 查询成功
 		}
 		return ReturnResult.sendError("无结果");
 	}
