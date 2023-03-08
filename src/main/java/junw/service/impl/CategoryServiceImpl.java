@@ -24,10 +24,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
-
+	/**
+	 * 菜品
+	 */
 	@Autowired
 	private DishService dishService;
-
+	/**
+	 * 套餐
+	 */
 	@Autowired
 	private SetMealService setMealService;
 
@@ -52,6 +56,5 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 			throw new CustomException("还有关联套餐，不允许删除");
 		}
 		super.removeById(id);
-
 	}
 }

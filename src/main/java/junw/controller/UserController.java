@@ -60,15 +60,17 @@ public class UserController {
 		if (userPhone != null) {
 			String validateCode = ValidateCodeUtils.generateValidateCode(6).toString();
 			log.info("目前的验证码是：" + validateCode);
-
-			SMSUtils.sendMessage("外卖", "", userPhone, validateCode);
+			// =================================================================
+			// 没有购买下面的阿里云服务，直接注释掉
+			// =================================================================
+			// SMSUtils.sendMessage("外卖", "", userPhone, validateCode);
 			// 短信签名
 			// 短信的模板代码
 			// 用户手机号，随机出来的验证码
 			// httpSession.setAttribute(userPhone, validateCode);
 			// 项目优化：将验证码缓存到redis中
 			// 因为我们的验证码保存到缓存中，所以也就不需要上面的session来保存
-			redisTemplate.opsForValue().set(userPhone, validateCode, 5, TimeUnit.MINUTES);
+			// redisTemplate.opsForValue().set(userPhone, validateCode, 5, TimeUnit.MINUTES);
 			return ReturnResult.sendSuccess("发送成功");
 		}
 		return ReturnResult.sendError("发送失败");

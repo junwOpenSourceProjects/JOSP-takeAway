@@ -108,6 +108,4 @@ public class ShoppingCartController {
 		shoppingCartService.remove(lambdaQueryWrapper);
 		return ReturnResult.sendSuccess("清空成功");
 	}
-
-
 }

@@ -80,20 +80,20 @@ public class SetMealController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "page", value = "页面", required = true),
 			@ApiImplicitParam(name = "pageSize", value = "每页数据", required = true),
-			@ApiImplicitParam(name = "name", value = "名称", required = false)
+			@ApiImplicitParam(name = "name", value = "名称")
 	})
 	public ReturnResult<Page> page(int page, int pageSize, String name) {
-		Page<Setmeal> setmealPage = new Page<>(page, pageSize);
-		Page<SetmealDto> dtoPage = new Page<>();
+		Page<Setmeal> setmealPage = new Page<>(page, pageSize);// 查询套餐
+		Page<SetmealDto> dtoPage = new Page<>();// 查询页面展示出来的套餐dto
 
 		LambdaQueryWrapper<Setmeal> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 
-		lambdaQueryWrapper.like(name != null, Setmeal::getName, name);
-		lambdaQueryWrapper.orderByDesc(Setmeal::getUpdateTime).orderByDesc(Setmeal::getStatus);
-		setMealService.page(setmealPage, lambdaQueryWrapper);
-		// dtoPage.se
+		lambdaQueryWrapper.like(name != null, Setmeal::getName, name);// 名称可以为空
+		lambdaQueryWrapper.orderByDesc(Setmeal::getUpdateTime).orderByDesc(Setmeal::getStatus);//首先是更新时间，其次是展示状态
+		setMealService.page(setmealPage, lambdaQueryWrapper);// 查询套餐分页
+
 		BeanUtils.copyProperties(setmealPage, dtoPage, "records");// 拷贝属性过去
-		List<Setmeal> setmealList = setmealPage.getRecords();
+		List<Setmeal> setmealList = setmealPage.getRecords();// 获取分页中的套餐信息，然后将其保存为一个list，遍历
 		List<SetmealDto> setmealDtos = setmealList.stream().map((item) -> {
 			SetmealDto setmealDto = new SetmealDto();
 			Long categoryId = item.getCategoryId();// 根据id查询数据库
@@ -106,8 +106,8 @@ public class SetMealController {
 			// return item;
 			return setmealDto;// 因为这里返回的是我们的setMealDto，
 			// 所以这里就需要使用我们上面new出来的新list
-		}).collect(Collectors.toList());
-		dtoPage.setRecords(setmealDtos);
+		}).collect(Collectors.toList());// 保存到新的setMealDto对应的list中
+		dtoPage.setRecords(setmealDtos);// 将上面的list保存到page中
 
 		return ReturnResult.sendSuccess(setmealPage);
 	}

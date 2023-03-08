@@ -44,7 +44,7 @@ public class SetMealServiceImpl extends ServiceImpl<SetMealMapper, Setmeal> impl
 		this.save(setmealDto);// 保存setMeal信息
 		List<SetmealDish> setmealDishList = setmealDto.getSetmealDishList();
 
-		setmealDishList.stream().map((item) -> {
+		setmealDishList = setmealDishList.stream().map((item) -> {
 			item.setSetmealId(String.valueOf(setmealDto.getId()));
 			return item;
 		}).collect(Collectors.toList());// 菜品批量保存
@@ -76,6 +76,4 @@ public class SetMealServiceImpl extends ServiceImpl<SetMealMapper, Setmeal> impl
 		lambdaQueryWrapper1.in(SetmealDish::getSetmealId, ids);
 		setmealDishService.remove(lambdaQueryWrapper1);
 	}
-
-
 }

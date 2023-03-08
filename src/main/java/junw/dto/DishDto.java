@@ -21,13 +21,16 @@ public class DishDto extends Dish {
 	// dto是传输过程中使用的对象
 	// 首先要继承我们的父类，比如说dish
 	// 这里传输，是在dish的基础上，多了一个List类型的对象
-
-
-
-	List<DishFlavor> flavors = new ArrayList<>();
-
+	/**
+	 * 口味list
+	 */
+	private List<DishFlavor> flavors = new ArrayList<>();
+	/**
+	 * 套餐名称
+	 */
 	private String categoryName;
+	/**
+	 * 数量
+	 */
 	private Integer copies;
-
-
 }

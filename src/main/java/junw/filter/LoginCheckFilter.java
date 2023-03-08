@@ -53,7 +53,8 @@ public class LoginCheckFilter implements Filter {
 		ThreadLocalBaseContent.setUserId(userId);// 直接将session中的数据保存到线程中
 		String requestURI = httpServletRequest.getRequestURI();// 获取当前请求路径
 		// 新建一个路径数组，判断请求是否存在于数组中
-		String[] requestUrls = {"/employee/login",
+		String[] requestUrls = {
+				"/employee/login",
 				"/employee/logout",
 				"/backend/**",
 				// 移动端处理的拦截
@@ -64,10 +65,10 @@ public class LoginCheckFilter implements Filter {
 				"/doc.html",
 				"webjars/**",
 				"/swagger-resources",
-				"/v2/api-docs"};
-		// "/user/sendMsg"移动端发送短信
-		// "user/login"移动端用户登录
-
+				"/v2/api-docs",
+				"/user/sendMsg",// 移动端发送短信
+				"user/login"// 移动端用户登录
+		};
 
 		log.info("我是LoginCheckFliter拦截，拦截的请求是{}", httpServletRequest.getRequestURL());
 		// {}相当于占位符，直接跟上参数，就可以默认带上后面的变量

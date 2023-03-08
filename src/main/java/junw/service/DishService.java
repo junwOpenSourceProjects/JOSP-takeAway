@@ -37,6 +37,4 @@ public interface DishService extends IService<Dish> {
 	 * @param dishDto 实体类
 	 */
 	void updateDishInfo(DishDto dishDto);
-
-
 }

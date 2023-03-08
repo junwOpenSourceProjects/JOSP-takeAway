@@ -22,7 +22,6 @@ public class SetmealDto extends Setmeal {
 	 */
 	private List<SetmealDish> setmealDishList;
 
-
 	/**
 	 * 菜品名称
 	 */
