@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @Slf4j
 @Api(tags = "用户相关接口")
-@RequestMapping
+@RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -97,6 +97,7 @@ public class UserController {
 		// =======================================================================
 		// 和上面同理，直接从缓存中读取即可
 		Object attribute = redisTemplate.opsForValue().get(phone);// 从redis中获取的验证码
+		log.info("断点：" + attribute.toString());
 		// =======================================================================
 		if (attribute != null && attribute.equals(code)) {
 			LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();

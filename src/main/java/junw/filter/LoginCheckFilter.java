@@ -59,18 +59,16 @@ public class LoginCheckFilter implements Filter {
 				"/backend/**",
 				// 移动端处理的拦截
 				"/front/**",
-				"/user/sendMsg",
-				"user/login",
+				// "/user/sendMsg",// 移动端发送短信
+				// "user/login",// 移动端用户登录
 				// 添加swagger以后补充的拦截
 				"/doc.html",
 				"webjars/**",
 				"/swagger-resources",
 				"/v2/api-docs",
-				"/user/sendMsg",// 移动端发送短信
-				"user/login"// 移动端用户登录
 		};
 
-		log.info("我是LoginCheckFliter拦截，拦截的请求是{}", httpServletRequest.getRequestURL());
+		log.info("我是LoginCheckFilter拦截，拦截的请求是{}", httpServletRequest.getRequestURL());
 		// {}相当于占位符，直接跟上参数，就可以默认带上后面的变量
 
 		// 判断是否需要处理
