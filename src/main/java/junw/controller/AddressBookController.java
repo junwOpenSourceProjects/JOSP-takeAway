@@ -144,6 +144,4 @@ public class AddressBookController {
 		lambdaQueryWrapper.orderByDesc(AddressBook::getUpdateTime);
 		return ReturnResult.sendSuccess(addressBookService.list(lambdaQueryWrapper));
 	}
-
-
 }

@@ -83,12 +83,15 @@ public class EmployeeController2 {
 	public ReturnResult<String> saveEmployee(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
 		log.info("新增员工：" + employee.toString());
 		employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));// 需要加密
+		// 这里统一设置初试登录密码为123456
+		// =================================================================
 		// 因为我们在实体类中已经添加了自动新增和自动插入的fill属性，同时在common中做了一个拦截器
 		// 所以下面的四个属性全部都可以自动完成，这是mybatisPlus框架提供的服务
 		// employee.setCreateTime(new Date());
 		// employee.setUpdateTime(new Date());
 		// employee.setCreateUser(id);
 		// employee.setUpdateUser(id);
+		// =================================================================
 		log.info("当前的id为：" + httpServletRequest.getSession().getAttribute("employeeInfo"));
 		Long id = (Long) httpServletRequest.getSession().getAttribute("employeeInfo");
 		employeeService.save(employee);

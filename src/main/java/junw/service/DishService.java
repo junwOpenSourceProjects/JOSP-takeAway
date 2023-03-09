@@ -16,7 +16,7 @@ import junw.entity.Dish;
 public interface DishService extends IService<Dish> {
 
 	/**
-	 * 新增菜品，同时保存口味
+	 * 新增菜品，同时插入菜品对应的口味数据，需要操作两张表：dish、dish_flavor
 	 *
 	 * @param dishDto
 	 */
@@ -24,7 +24,7 @@ public interface DishService extends IService<Dish> {
 
 
 	/**
-	 * 根据id查询口味和菜品信息
+	 * 根据id查询菜品信息和对应的口味信息
 	 *
 	 * @param id id
 	 * @return dishDto
@@ -32,7 +32,7 @@ public interface DishService extends IService<Dish> {
 	DishDto getDishDtoById(Long id);
 
 	/**
-	 * 更新菜品信息
+	 * 更新菜品信息，同时更新对应的口味信息
 	 *
 	 * @param dishDto 实体类
 	 */

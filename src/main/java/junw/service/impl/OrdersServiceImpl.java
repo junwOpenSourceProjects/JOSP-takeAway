@@ -62,8 +62,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 	@Override
 	@Transactional
 	public void submitOneOrder(Orders orders) {
-
+// 获得当前用户id
 		Long userId = ThreadLocalBaseContent.getUserId();
+		// 查询当前用户的购物车数据
 		LambdaQueryWrapper<ShoppingCart> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(ShoppingCart::getUserId, userId);
 		List<ShoppingCart> shoppingCartList = shoppingCartService.list(lambdaQueryWrapper);
@@ -103,7 +104,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 		orders.setOrderTime(new Date());
 		orders.setCheckoutTime(new Date());
 		orders.setStatus(2);
-		orders.setAmount(new BigDecimal(2));// 从前端拿数据
+		orders.setAmount(new BigDecimal(2));// 从前端拿总金额数据
 		orders.setUserId(userId);
 		orders.setNumber(String.valueOf(randomOrderId));
 		orders.setUserName(userById.getName());
@@ -116,9 +117,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 						+ addressBookById.getDetail());
 
 
-		this.save(orders);
+		this.save(orders);//向订单表插入数据，一条数据
 
-		orderDetailService.saveBatch(orderDetailList);
+		orderDetailService.saveBatch(orderDetailList);//向订单明细表插入数据，多条数据
 
 		shoppingCartService.remove(lambdaQueryWrapper);// 删除购物车
 

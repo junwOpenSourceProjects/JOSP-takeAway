@@ -84,12 +84,18 @@ public class LoginCheckFilter implements Filter {
 		if (httpServletRequest.getSession().getAttribute("employeeInfo") != null) {
 			filterChain.doFilter(httpServletRequest, httpServletResponse);
 			log.info("登录成功，当前用户为：" + httpServletRequest.getSession().getAttribute("employeeInfo"));
+			// Long empId = (Long) httpServletRequest.getSession().getAttribute("employeeInfo");
+			// ThreadLocalBaseContent.setUserId(empId);
+			// filterChain.doFilter(httpServletRequest, httpServletResponse);
 			return;
 		}
 		// 新增移动端用户的登录操作
 		if (httpServletRequest.getSession().getAttribute("user") != null) {
 			filterChain.doFilter(httpServletRequest, httpServletResponse);
 			log.info("登录成功，当前用户为：" + httpServletRequest.getSession().getAttribute("user"));
+			// Long empId = (Long) httpServletRequest.getSession().getAttribute("user");
+			// ThreadLocalBaseContent.setUserId(empId);
+			// filterChain.doFilter(httpServletRequest, httpServletResponse);
 			return;
 		}
 		// httpServletResponse.getWriter().write(JSON.toJSONString(ReturnResult.sendError("登录错误")));
@@ -103,8 +109,8 @@ public class LoginCheckFilter implements Filter {
 	/**
 	 * 遍历请求链接
 	 *
-	 * @param urls 数组
-	 * @param url  请求链接
+	 * @param urls       数组
+	 * @param requestURI 请求链接
 	 * @return 布尔
 	 */
 	public boolean checkLogin(String[] urls, String requestURI) {// 获取请求的URI，遍历判断是否存在于数组中

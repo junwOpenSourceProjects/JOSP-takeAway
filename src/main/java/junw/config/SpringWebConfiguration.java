@@ -36,7 +36,6 @@ public class SpringWebConfiguration extends WebMvcConfigurationSupport {
 	// 添加完成swagger依赖以后，就需要在web的参数配置上添加对应的注解
 	// @EnableSwagger2
 	// @EnableKnife4j
-	//
 
 	@Bean
 	public Docket createRestApi() {

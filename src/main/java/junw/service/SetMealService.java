@@ -18,14 +18,14 @@ import java.util.List;
 public interface SetMealService extends IService<Setmeal> {
 
 	/**
-	 * 我是保存一个套餐
+	 * 新增套餐，同时需要保存套餐和菜品的关联关系
 	 *
 	 * @param setmealDto 实体类
 	 */
 	void saveOneDish(SetmealDto setmealDto);
 
 	/**
-	 * 删除套餐
+	 * 删除套餐，同时需要删除套餐和菜品的关联数据
 	 * @param ids id列
 	 */
 	void removeWithDish(List<Long> ids);

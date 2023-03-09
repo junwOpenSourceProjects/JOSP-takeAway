@@ -34,7 +34,7 @@ public class SetMealServiceImpl extends ServiceImpl<SetMealMapper, Setmeal> impl
 	private SetmealDishService setmealDishService;
 
 	/**
-	 * 我是保存一个套餐
+	 * 新增套餐，同时需要保存套餐和菜品的关联关系
 	 *
 	 * @param setmealDto 实体类
 	 * @Transactional
@@ -49,11 +49,11 @@ public class SetMealServiceImpl extends ServiceImpl<SetMealMapper, Setmeal> impl
 			return item;
 		}).collect(Collectors.toList());// 菜品批量保存
 
-		setmealDishService.saveBatch(setmealDishList);// 保存这个list
+		setmealDishService.saveBatch(setmealDishList);// 保存套餐和菜品的关联信息，操作setmeal_dish,执行insert操作
 	}
 
 	/**
-	 * 删除套餐
+	 * 删除套餐，同时需要删除套餐和菜品的关联数据
 	 *
 	 * @param ids id列
 	 */

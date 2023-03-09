@@ -30,5 +30,4 @@ public class ReggieApplication {
 		SpringApplication.run(ReggieApplication.class, args);
 		log.info("spring已经启动了");
 	}
-
 }

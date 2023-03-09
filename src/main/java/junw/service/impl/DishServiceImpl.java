@@ -70,6 +70,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
 	@Override
 	public DishDto getDishDtoById(Long id) {
 		Dish dish = this.getById(id);
+		// 查询当前菜品对应的口味信息，从dish_flavor表查询
 		LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(DishFlavor::getDishId, id);
 		List<DishFlavor> dishFlavors = dishFlavorService.list(lambdaQueryWrapper);
