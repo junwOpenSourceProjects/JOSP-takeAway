@@ -43,8 +43,6 @@ X
 (src/main/java/junw/entity/Employee2.java,0\6\069a32ad5c52c0f8bda63d363a5ae898d3e118a8
 ]
 -src/main/java/junw/mapper/EmployeeMapper.java,2\b\2b35a55129f1df9b89089cc4a884b67aa2de3009
-W
-'src/main/java/junw/entity/Employee.java,8\2\822cec34bfa369d3586e294af6e3f5f6e1264849
 e
 5src/main/java/junw/common/ThreadLocalBaseContent.java,1\d\1d6c6353cce4d82e2bd1d9ec06a5fff705f51a27
 ]
@@ -76,8 +74,6 @@ l
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-e
-5src/main/java/junw/controller/EmployeeController.java,4\5\4554cf4fbb32da2bc0b497f75ed4e6a5e9df0f4b
 N
 src/test/java/Jedis2Redis.java,e\c\ec59348e00ec11e38a2f8ab1f5793bbaca847362
 Q
@@ -140,8 +136,6 @@ g
 7src/main/java/junw/config/MybatisPlusConfiguration.java,c\e\ce4a1e0ccc47b4378781553e162d4b7df15faa91
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-S
-#src/main/java/junw/entity/User.java,8\c\8c547811754740fdfd4887c0964d9f445cd3156f
 X
 (src/main/java/junw/entity/QueryDemo.java,c\1\c1c3fbe0f7bc7f165534d60081e366045e5d4a61
 e
@@ -154,8 +148,6 @@ h
 8src/main/java/junw/controller/OrderDetailController.java,f\e\fe83f2b07ccb04b03308d2961e133747bab066ed
 c
 3src/main/java/junw/controller/OrdersController.java,0\1\01341d40e21c2464cf3621e5953bd5a5a51ea3f4
-f
-6src/main/java/junw/controller/EmployeeController2.java,1\6\16e73eb6be107d2713557db567f44c97fec5fef8
 a
 1src/main/java/junw/controller/UserController.java,6\9\69a1c9d2c077926139b7ed7d13a8c905ac0ca13d
 \
@@ -170,3 +162,11 @@ _
 /src/main/java/junw/filter/LoginCheckFilter.java,8\3\838439551ec6d4b49f3bad6cf1fd6bc969ba4b77
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+W
+'src/main/java/junw/entity/Employee.java,8\2\822cec34bfa369d3586e294af6e3f5f6e1264849
+S
+#src/main/java/junw/entity/User.java,8\c\8c547811754740fdfd4887c0964d9f445cd3156f
+f
+6src/main/java/junw/controller/EmployeeController2.java,1\6\16e73eb6be107d2713557db567f44c97fec5fef8
+e
+5src/main/java/junw/controller/EmployeeController.java,4\5\4554cf4fbb32da2bc0b497f75ed4e6a5e9df0f4b
